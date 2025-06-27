@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utkarsh Rajput - Full Stack Developer</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css"><!-- Add this line -->
+</head>
+<body>
+    <header>
+      <nav>
+        <div class="logo">
+          <div class="logo-icon">UR</div>
+          Utkarsh Rajput
+        </div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="mobile-menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div id="particles-js"></div>
+        <div class="hero-content">
+          <h1>Utkarsh Rajput</h1>
+          <p class="subtitle"></p>
+          <p class="description">
+            MCA student with 3 live-deployed full-stack projects, hands-on
+            experience in AI-powered chatbots, and leadership experience as PMA
+            President. Passionate about using technology to solve real-world
+            problems with clean code and clear intent.
+          </p>
+          <div class="cta-buttons">
+            <a href="#projects" class="btn btn-primary">
+              <i class="fas fa-code"></i>
+              View My Work
+            </a>
+            <a href="#contact" class="btn btn-secondary">
+              <i class="fas fa-envelope"></i>
+              Get In Touch
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <h2 class="section-title fade-in-up">About Me</h2>
+        <div class="about-content fade-in-up">
+          <div class="about-image">
+            <div class="profile-img">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+          <div class="about-text">
+            <h3>Building the Future with Code</h3>
+            <p>
+              Currently pursuing my Master of Computer Applications at PCCoE
+              (Pune University) with a stellar 9.3 GPA. I'm passionate about
+              creating innovative solutions that bridge the gap between complex
+              technology and real-world problems.
+            </p>
+            <p>
+              My journey in tech has been marked by hands-on experience in
+              full-stack development, AI integration, and leadership roles. I
+              believe in writing clean, purposeful code that makes a difference.
+            </p>
+            <p>
+              When I'm not coding, you'll find me leading initiatives as PMA
+              President or exploring the latest developments in AI and machine
+              learning.
+            </p>
+          </div>
+        </div>
+        <div class="stats fade-in-up">
+          <div class="stat-item">
+            <div class="stat-number">9.3</div>
+            <div class="stat-label">Current GPA</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">3+</div>
+            <div class="stat-label">Live Projects</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">900+</div>
+            <div class="stat-label">Users Impacted</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">30%</div>
+            <div class="stat-label">Performance Boost</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section">
+        <h2 class="section-title fade-in-up">Skills & Technologies</h2>
+        <div class="skills-grid fade-in-up">
+          <div class="skill-category">
+            <h3><i class="fas fa-code"></i> Programming Languages</h3>
+            <div class="skill-tags">
+              <span class="skill-tag"
+                ><i class="fab fa-python"></i> Python</span
+              >
+              <span class="skill-tag"
+                ><i class="fab fa-js"></i> JavaScript</span
+              >
+              <span class="skill-tag"><i class="fab fa-java"></i> Java</span>
+              <span class="skill-tag"><i class="fab fa-php"></i> PHP</span>
+              <span class="skill-tag"><i class="fas fa-plus"></i> C++</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3><i class="fas fa-laptop-code"></i> Web Technologies</h3>
+            <div class="skill-tags">
+              <span class="skill-tag"><i class="fab fa-react"></i> React</span>
+              <span class="skill-tag"
+                ><i class="fab fa-python"></i> Django</span
+              >
+              <span class="skill-tag"
+                ><i class="fab fa-html5"></i> HTML/CSS</span
+              >
+              <span class="skill-tag"
+                ><i class="fab fa-bootstrap"></i> Bootstrap</span
+              >
+              <span class="skill-tag"
+                ><i class="fas fa-sync-alt"></i> AJAX</span
+              >
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3><i class="fas fa-database"></i> Database & Tools</h3>
+            <div class="skill-tags">
+              <span class="skill-tag"
+                ><i class="fas fa-database"></i> MySQL</span
+              >
+              <span class="skill-tag"><i class="fas fa-plug"></i> PDO</span>
+              <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
+              <span class="skill-tag"
+                ><i class="fas fa-vector-square"></i> Vector Databases</span
+              >
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3><i class="fas fa-robot"></i> AI & Machine Learning</h3>
+            <div class="skill-tags">
+              <span class="skill-tag"><i class="fas fa-brain"></i> LLMs</span>
+              <span class="skill-tag"
+                ><i class="fas fa-project-diagram"></i> TensorFlow</span
+              >
+              <span class="skill-tag"
+                ><i class="fas fa-comments"></i> Chatbot Development</span
+              >
+              <span class="skill-tag"
+                ><i class="fas fa-network-wired"></i> Deep Learning</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-carousel fade-in-up">
+          <div class="tech-track">
+            <div class="tech-item">
+              <div class="tech-icon"><i class="fab fa-python"></i></div>
+              <div class="tech-label">Python</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon"><i class="fab fa-js"></i></div>
+              <div class="tech-label">JavaScript</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon"><i class="fab fa-react"></i></div>
+              <div class="tech-label">React</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon"><i class="fab fa-node-js"></i></div>
+              <div class="tech-label">Node.js</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon"><i class="fab fa-docker"></i></div>
+              <div class="tech-label">Docker</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon"><i class="fab fa-git-alt"></i></div>
+              <div class="tech-label">Git</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon"><i class="fas fa-database"></i></div>
+              <div class="tech-label">MySQL</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon"><i class="fab fa-aws"></i></div>
+              <div class="tech-label">AWS</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon">
+                <i class="fas fa-project-diagram"></i>
+              </div>
+              <div class="tech-label">TensorFlow</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon"><i class="fab fa-linux"></i></div>
+              <div class="tech-label">Linux</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <h2 class="section-title fade-in-up">Featured Projects</h2>
+        <div class="projects-header fade-in-up">
+          <h3>My Recent Work</h3>
+          <div class="project-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="ai">AI/ML</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="fullstack">
+              Full Stack
+            </button>
+          </div>
+        </div>
+        <div class="projects-grid fade-in-up">
+          <!-- Project 1: AI ChatBot -->
+          <div class="project-card" data-category="ai">
+            <div class="project-header">
+              <h3 class="project-title">AI ChatBot</h3>
+              <p class="project-subtitle">Intelligent Document Processing</p>
+            </div>
+            <div class="project-content">
+              <p class="project-description">
+                Advanced AI chatbot that processes uploaded files and returns
+                context-aware answers using LLMs + vector search. Achieved 90%+
+                accuracy in document-based Q&A during internal testing.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Django</span>
+                <span class="tech-tag">LLMs</span>
+                <span class="tech-tag">Vector Search</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link view-project" data-project="1">
+                  <i class="fas fa-eye"></i> View Details
+                </a>
+                <a href="#" class="project-link">
+                  <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a href="#" class="project-link">
+                  <i class="fab fa-github"></i> GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: ShopEase -->
+          <div class="project-card" data-category="fullstack web">
+            <div class="project-header">
+              <h3 class="project-title">ShopEase</h3>
+              <p class="project-subtitle">E-commerce Marketplace</p>
+            </div>
+            <div class="project-content">
+              <p class="project-description">
+                Full-fledged e-commerce platform enabling seamless interaction
+                between buyers and sellers. Features AI-based chatbot for
+                real-time user support and navigation assistance.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">Django</span>
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">HTML/CSS</span>
+                <span class="tech-tag">AJAX</span>
+                <span class="tech-tag">AI Chatbot</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link view-project" data-project="2">
+                  <i class="fas fa-eye"></i> View Details
+                </a>
+                <a href="#" class="project-link">
+                  <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a href="#" class="project-link">
+                  <i class="fab fa-github"></i> GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: NEEV Portal -->
+          <div class="project-card" data-category="web">
+            <div class="project-header">
+              <h3 class="project-title">NEEV Portal</h3>
+              <p class="project-subtitle">Student Profiling System</p>
+            </div>
+            <div class="project-content">
+              <p class="project-description">
+                Comprehensive student profiling software designed for SEMCOM
+                College, now used by 900+ students for academic data and
+                communication. Enhanced resource access and student-teacher
+                communication.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">PHP</span>
+                <span class="tech-tag">PDO</span>
+                <span class="tech-tag">MySQL</span>
+                <span class="tech-tag">Responsive Design</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link view-project" data-project="3">
+                  <i class="fas fa-eye"></i> View Details
+                </a>
+                <a href="#" class="project-link">
+                  <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a href="#" class="project-link">
+                  <i class="fab fa-github"></i> GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4: BLogSite -->
+          <div class="project-card" data-category="web">
+            <div class="project-header">
+              <h3 class="project-title">BLogSite</h3>
+              <p class="project-subtitle">Interactive Blogging Platform</p>
+            </div>
+            <div class="project-content">
+              <p class="project-description">
+                Responsive blogging platform with comprehensive user and author
+                panels. Features include post creation, likes, comments, and
+                detailed user engagement tracking.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">PHP</span>
+                <span class="tech-tag">PDO</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">CSS3</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link view-project" data-project="4">
+                  <i class="fas fa-eye"></i> View Details
+                </a>
+                <a href="#" class="project-link">
+                  <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a href="#" class="project-link">
+                  <i class="fab fa-github"></i> GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- LeetCode Streak Alert -->
+          <div class="project-card" data-category="automation ai">
+            <div class="project-header">
+              <h3 class="project-title">LeetCode Streak Bot</h3>
+              <p class="project-subtitle">AI-Powered Accountability System</p>
+            </div>
+            <div class="project-content">
+              <p class="project-description">
+                A daily reminder bot that checks your LeetCode activity and
+                sends motivational praise or hilarious roasts via Telegram based
+                on your coding consistency.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">GitHub Actions</span>
+                <span class="tech-tag">GraphQL</span>
+                <span class="tech-tag">Telegram API</span>
+                <span class="tech-tag">AI Motivation</span>
+              </div>
+              <div class="project-links">
+                <a
+                  href="#leetcode-modal"
+                  class="project-link view-project"
+                  data-project="leetcode"
+                >
+                  <i class="fas fa-info-circle"></i> Details
+                </a>
+                <a
+                  href="https://github.com/yourusername/leetcode-streak-bot"
+                  class="project-link"
+                  target="_blank"
+                >
+                  <i class="fab fa-github"></i> Code
+                </a>
+                <a
+                  href="https://t.me/your_bot"
+                  class="project-link"
+                  target="_blank"
+                >
+                  <i class="fas fa-robot"></i> Demo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Project Modals -->
+      <div class="modal" id="projectModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="modalTitle">Project Title</h3>
+            <button class="modal-close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="modal-images">
+              <div class="modal-image">
+                <img
+                  src="https://via.placeholder.com/600x400"
+                  alt="Project Screenshot"
+                />
+              </div>
+              <div class="modal-image">
+                <img
+                  src="https://via.placeholder.com/600x400"
+                  alt="Project Screenshot"
+                />
+              </div>
+              <div class="modal-image">
+                <img
+                  src="https://via.placeholder.com/600x400"
+                  alt="Project Screenshot"
+                />
+              </div>
+            </div>
+            <div id="modalDescription">
+              <p>
+                Project description goes here with more details about the
+                implementation, challenges faced, and solutions developed.
+              </p>
+              <p>
+                Additional technical details and features can be listed here.
+              </p>
+            </div>
+            <div class="project-tech" id="modalTech">
+              <span class="tech-tag">Technology</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link" id="modalLiveLink">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+              <a href="#" class="project-link" id="modalGithubLink">
+                <i class="fab fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal" id="leetcode-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>LeetCode Streak Checker Bot</h3>
+            <button class="modal-close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="modal-images">
+              <div class="modal-image">
+                <img
+                  src="https://via.placeholder.com/600x400?text=Bot+Demo+Screenshot"
+                  alt="Bot in action"
+                />
+              </div>
+              <div class="modal-image">
+                <img
+                  src="https://via.placeholder.com/600x400?text=GitHub+Action+Workflow"
+                  alt="Workflow setup"
+                />
+              </div>
+            </div>
+
+            <div class="feature-list">
+              <h4><i class="fas fa-bolt"></i> Key Features</h4>
+              <ul>
+                <li>Daily automated streak checks via GitHub Actions</li>
+                <li>Personalized motivational/humiliating messages</li>
+                <li>Secure credential management using GitHub Secrets</li>
+                <li>Real-time Telegram notifications</li>
+                <li>100% serverless architecture</li>
+              </ul>
+
+              <h4><i class="fas fa-cogs"></i> How It Works</h4>
+              <ol>
+                <li>Runs daily at 10:45 PM IST via cron job</li>
+                <li>Checks your last 5 LeetCode submissions</li>
+                <li>Verifies if any were submitted today</li>
+                <li>Sends appropriate Telegram message</li>
+              </ol>
+            </div>
+
+            <div class="project-tech">
+              <span class="tech-tag">Python 3.10</span>
+              <span class="tech-tag">GitHub Actions</span>
+              <span class="tech-tag">GraphQL</span>
+              <span class="tech-tag">Telegram Bot API</span>
+              <span class="tech-tag">LeetCode API</span>
+            </div>
+
+            <div class="project-links">
+              <a
+                href="https://github.com/yourusername/leetcode-streak-bot"
+                class="project-link"
+                target="_blank"
+              >
+                <i class="fab fa-github"></i> View on GitHub
+              </a>
+              <a
+                href="https://t.me/your_bot"
+                class="project-link"
+                target="_blank"
+              >
+                <i class="fas fa-robot"></i> Try Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <section id="experience" class="section">
+        <h2 class="section-title fade-in-up">Professional Journey</h2>
+
+        <div class="experience-container">
+          <!-- Experience Column -->
+          <div class="experience-column">
+            <div class="experience-header">
+              <div class="experience-icon">
+                <i class="fas fa-laptop-code"></i>
+              </div>
+              <h3>Professional Experience</h3>
+            </div>
+          
+            <div class="experience-list">
+              <!-- Item 1 -->
+              <div class="experience-item fade-in-up">
+                <div class="exp-dot tech-dot"></div>
+                <div class="exp-content">
+                  <h4>Trainee Data Science Engineer</h4>
+                  <div class="exp-meta">
+                    <span class="company">KodeZera</span>
+                    <span class="date">
+                      <i class="far fa-calendar-alt"></i> Nov 2024 – Present
+                    </span>
+                  </div>
+                  <p class="exp-desc">
+                    Building a production-grade AI chatbot using LLMs (Mistral, Phi-2) with vector stores (FAISS). 
+                    Reduced query latency by 30% via custom embedding caching logic. 
+                    Integrated Hugging Face Transformers into a scalable pipeline on limited hardware (GTX 1650).
+                  </p>
+                </div>
+              </div>
+          
+              <!-- Item 2 -->
+              <div class="experience-item fade-in-up">
+                <div class="exp-dot tech-dot"></div>
+                <div class="exp-content">
+                  <h4>Backend Developer Intern</h4>
+                  <div class="exp-meta">
+                    <span class="company">SEMCOM College</span>
+                    <span class="date">
+                      <i class="far fa-calendar-alt"></i> May 2024 – Jul 2024
+                    </span>
+                  </div>
+                  <p class="exp-desc">
+                    Engineered the NEEV Portal serving <b>900+ students</b> with features like role-based dashboards, PDF/Excel reports, attendance uploads, and secure student logins.
+                    Automated resource workflows and enhanced admin control, boosting faculty engagement by 60%.
+                  </p>
+                </div>
+              </div>
+          
+              <!-- Item 3 -->
+              <div class="experience-item fade-in-up">
+                <div class="exp-dot tech-dot"></div>
+                <div class="exp-content">
+                  <h4>Web Development Intern</h4>
+                  <div class="exp-meta">
+                    <span class="company">Codentic Software</span>
+                    <span class="date">
+                      <i class="far fa-calendar-alt"></i> May 2023 – Jun 2023
+                    </span>
+                  </div>
+                  <p class="exp-desc">
+                    Developed responsive, single-page apps using React.js and React Router DOM. 
+                    Delivered pixel-perfect UI with advanced CSS media queries and ensured cross-device compatibility.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+          <!-- Leadership Column -->
+          <div class="leadership-column">
+            <div class="experience-header">
+              <div class="experience-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3>Leadership</h3>
+            </div>
+
+            <div class="experience-list">
+              <!-- PMA President -->
+              <div class="experience-item fade-in-up">
+                <div class="exp-dot leader-dot"></div>
+                <div class="exp-content">
+                  <h4>President, PMA</h4>
+                  <div class="exp-meta">
+                    <span class="company"
+                      >Pune Management Association (PCCOE)</span
+                    >
+                    <span class="date"
+                      ><i class="far fa-calendar-alt"></i> Apr 2025 -
+                      Present</span
+                    >
+                  </div>
+                  <p class="exp-desc">
+                    Leading the PMA college chapter in alignment with official
+                    norms. Oversee strategic planning of student-led activities,
+                    represent PCCOE in PMA forums and inter-collegiate events,
+                    and act as the primary liaison between the chapter and the
+                    central body.
+                  </p>
+                </div>
+              </div>
+
+              <!-- TNP Core Member -->
+              <div class="experience-item fade-in-up">
+                <div class="exp-dot leader-dot"></div>
+                <div class="exp-content">
+                  <h4>Core Member, T&P Cell</h4>
+                  <div class="exp-meta">
+                    <span class="company">PCCOE</span>
+                    <span class="date"
+                      ><i class="far fa-calendar-alt"></i> Sep 2024 -
+                      Present</span
+                    >
+                  </div>
+                  <p class="exp-desc">
+                    Revamped placement preparation modules benefiting 70+
+                    students. Organized a pre-CRTP placement bootcamp for peers
+                    with daily prep schedules, GD sessions, lecturettes, and
+                    mock interviews. Collaborated with recruiters like Workday &
+                    IntegriChain, improving placement outcomes.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Deputy General Secretary -->
+              <div class="experience-item fade-in-up">
+                <div class="exp-dot leader-dot"></div>
+                <div class="exp-content">
+                  <h4>Deputy General Secretary</h4>
+                  <div class="exp-meta">
+                    <span class="company">SEMCOM</span>
+                    <span class="date"
+                      ><i class="far fa-calendar-alt"></i> 2023 - 2024</span
+                    >
+                  </div>
+                  <p class="exp-desc">
+                    Elected by 180+ BCA students to represent academic
+                    interests. Bridged communication between faculty and
+                    students, resolving 30+ academic concerns.
+                  </p>
+                </div>
+              </div>
+
+              <!-- AIESEC Volunteer -->
+              <div class="experience-item fade-in-up">
+                <div class="exp-dot leader-dot"></div>
+                <div class="exp-content">
+                  <h4>Global Volunteer</h4>
+                  <div class="exp-meta">
+                    <span class="company">AIESEC India</span>
+                    <span class="date"
+                      ><i class="far fa-calendar-alt"></i> Aug 2022 - Jan
+                      2023</span
+                    >
+                  </div>
+                  <p class="exp-desc">
+                    Collaborated with international volunteers from countries
+                    like Sri Lanka, Brazil, and Egypt. Gained exposure to global
+                    perspectives on social issues and youth leadership.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="blog" class="section">
+        <h2 class="section-title fade-in-up">Blog & Articles</h2>
+        <div class="blog-grid fade-in-up">
+          <div class="blog-card">
+            <div class="blog-image">
+              <i class="fas fa-robot"></i>
+            </div>
+            <div class="blog-content">
+              <p class="blog-date">June 15, 2025</p>
+              <h3 class="blog-title">Building AI Chatbots with LLMs</h3>
+              <p class="blog-excerpt">
+                Exploring the process of creating intelligent chatbots using
+                large language models and vector databases for context-aware
+                responses.
+              </p>
+              <a href="#" class="blog-link">
+                Read More <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="blog-card">
+            <div class="blog-image">
+              <i class="fas fa-code"></i>
+            </div>
+            <div class="blog-content">
+              <p class="blog-date">May 28, 2025</p>
+              <h3 class="blog-title">Optimizing Django Performance</h3>
+              <p class="blog-excerpt">
+                Practical tips and techniques to improve the performance of
+                Django applications in production environments.
+              </p>
+              <a href="#" class="blog-link">
+                Read More <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="blog-card">
+            <div class="blog-image">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="blog-content">
+              <p class="blog-date">April 10, 2025</p>
+              <h3 class="blog-title">Balancing Academics and Projects</h3>
+              <p class="blog-excerpt">
+                Strategies for effectively managing coursework while working on
+                personal projects and gaining practical experience.
+              </p>
+              <a href="#" class="blog-link">
+                Read More <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact">
+        <h2 class="section-title fade-in-up">Let's Connect</h2>
+        <div class="contact-content fade-in-up">
+          <p style="font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9">
+            Ready to collaborate on innovative projects or discuss
+            opportunities? I'd love to hear from you!
+          </p>
+          <div class="contact-info">
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <h3>Email</h3>
+              <a href="mailto:utkarshrajput1583@gmail.com"
+                >utkarshrajput1583@gmail.com</a
+              >
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <h3>Location</h3>
+              <p>Pune, India</p>
+            </div>
+          </div>
+          <div class="social-links">
+            <a
+              href="https://linkedin.com/in/utkarshrajputt"
+              class="social-link"
+              target="_blank"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a
+              href="https://github.com/utkarshrajputt"
+              class="social-link"
+              target="_blank"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:utkarshrajput1583@gmail.com" class="social-link">
+              <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://x.com/Utkarshrajputtt" class="social-link" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+          <div class="resume-download">
+            <a
+             href="assets/resume/Utkarsh_Rajput_MCA_Resume_2025.pdf"
+              download
+              class="btn btn-secondary"
+            >
+              <i class="fas fa-download"></i> Download Full Resume (PDF)
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Chatbot Widget -->
+    <button class="chatbot-toggle" id="chatbotToggle">
+      <i class="fas fa-robot"></i>
+    </button>
+    <div class="chatbot-container" id="chatbotContainer">
+      <div class="chatbot-header">
+        <h3>AI Assistant</h3>
+        <button class="chatbot-close" id="chatbotClose">&times;</button>
+      </div>
+      <div class="chatbot-messages" id="chatbotMessages">
+        <div class="message bot-message">
+          Hi there! I'm your AI assistant. How can I help you today?
+        </div>
+      </div>
+      <div class="chatbot-input">
+        <input
+          type="text"
+          placeholder="Type your message..."
+          id="chatbotInput"
+        />
+        <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+          <div class="footer-links">
+            <a href="#home" class="footer-link">Home</a>
+            <a href="#about" class="footer-link">About</a>
+            <a href="#projects" class="footer-link">Projects</a>
+            <a href="#blog" class="footer-link">Blog</a>
+            <a href="#contact" class="footer-link">Contact</a>
+          </div>
+          <p class="copyright">
+            &copy; 2025 Utkarsh Rajput. Crafted with passion and code.
+          </p>
+        </div>
+      </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="assets/js/script.js"></script><!-- Add this line -->
+</body>
+</html>
