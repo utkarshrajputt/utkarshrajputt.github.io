@@ -1,42 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Utkarsh Rajput - Full Stack Developer</title>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
     <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/style.css"><!-- Add this line -->
-</head>
-<body>
-    <header>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Edu+QLD+Beginner:wght@400..700&family=Vast+Shadow&display=swap");
+    </style>
+
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- Add this line -->
+  </head>
+  <body>
+    <header class="floating-navbar">
       <nav>
-        <div class="logo">
-          <div class="logo-icon">UR</div>
-          Utkarsh Rajput
+        <div class="nav-container">
+          <!-- Logo Group -->
+          <div class="logo-group">
+            <div class="logo-icon">UR</div>
+            <span class="logo-name">Utkarsh Rajput</span>
+          </div>
+
+          <!-- Navigation Links -->
+          <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+
+          <!-- Right-Aligned Items -->
+          <div class="nav-right">
+            <button
+              class="theme-toggle"
+              id="themeToggle"
+              aria-label="Toggle theme"
+            >
+              <span class="theme-icon">
+                <i class="fas fa-moon"></i>
+              </span>
+              <span class="theme-icon">
+                <i class="fas fa-sun"></i>
+              </span>
+            </button>
+            <button class="mobile-menu-toggle">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
         </div>
-        <ul class="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <button class="theme-toggle" id="themeToggle">
-          <i class="fas fa-moon"></i>
-        </button>
-        <button class="mobile-menu-toggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </nav>
     </header>
 
@@ -44,183 +70,268 @@
       <section id="home" class="hero">
         <div id="particles-js"></div>
         <div class="hero-content">
-          <h1>Utkarsh Rajput</h1>
-          <p class="subtitle"></p>
-          <p class="description">
-            MCA student with 3 live-deployed full-stack projects, hands-on
-            experience in AI-powered chatbots, and leadership experience as PMA
-            President. Passionate about using technology to solve real-world
-            problems with clean code and clear intent.
+          <!-- Python Terminal Header -->
+          <div class="python-header">
+            <span class="python-prompt">>>></span>
+            <span class="python-cursor">█</span>
+          </div>
+
+          <!-- Name + Title -->
+          <h1 class="hero-title">
+            Hi, I'm <span class="name-gradient">Utkarsh Rajput</span>
+          </h1>
+          <p class="hero-subtitle">
+            Python FullStack Developer | Turning ideas into scalable solutions.
           </p>
-          <div class="cta-buttons">
-            <a href="#projects" class="btn btn-primary">
-              <i class="fas fa-code"></i>
-              View My Work
-            </a>
-            <a href="#contact" class="btn btn-secondary">
-              <i class="fas fa-envelope"></i>
-              Get In Touch
-            </a>
+
+          <!-- "pip install" CTA -->
+          <div class="python-command fade-in-up">
+            <span class="command-prefix">$</span>
+            <span class="command-text">pip install utkarshrajput</span>
           </div>
         </div>
       </section>
 
       <section id="about" class="section">
-        <h2 class="section-title fade-in-up">About Me</h2>
-        <div class="about-content fade-in-up">
-          <div class="about-image">
-            <div class="profile-img">
-              <i class="fas fa-user"></i>
+        <div class="section-header">
+          <h2 class="section-title">About Me</h2>
+          <!-- <div class="section-divider"></div> -->
+        </div>
+
+        <div class="about-container">
+          <!-- Profile Image with Floating Tech Tags -->
+          <div class="profile-container">
+            <div class="profile-img-wrapper">
+              <img
+                src="assets/images/profile-pic.png"
+                alt="Utkarsh Rajput"
+                class="profile-img"
+              />
+              <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Django</span>
+                <span class="tech-tag">AI/ML</span>
+              </div>
             </div>
           </div>
-          <div class="about-text">
-            <h3>Building the Future with Code</h3>
-            <p>
-              Currently pursuing my Master of Computer Applications at PCCoE
-              (Pune University) with a stellar 9.3 GPA. I'm passionate about
-              creating innovative solutions that bridge the gap between complex
-              technology and real-world problems.
-            </p>
-            <p>
-              My journey in tech has been marked by hands-on experience in
-              full-stack development, AI integration, and leadership roles. I
-              believe in writing clean, purposeful code that makes a difference.
-            </p>
-            <p>
-              When I'm not coding, you'll find me leading initiatives as PMA
-              President or exploring the latest developments in AI and machine
-              learning.
-            </p>
-          </div>
-        </div>
-        <div class="stats fade-in-up">
-          <div class="stat-item">
-            <div class="stat-number">9.3</div>
-            <div class="stat-label">Current GPA</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">3+</div>
-            <div class="stat-label">Live Projects</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">900+</div>
-            <div class="stat-label">Users Impacted</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">30%</div>
-            <div class="stat-label">Performance Boost</div>
+
+          <!-- Content Section -->
+          <div class="about-content">
+            <h3 class="about-heading">
+              Building the Future <span class="highlight">With Code</span>
+            </h3>
+
+            <div class="about-text">
+              <p class="intro-paragraph">
+                Currently pursuing my Master of Computer Applications at PCCoE
+                (Pune University) with a stellar <strong>9.3 GPA</strong>. I
+                specialize in creating innovative solutions that bridge complex
+                technology with real-world applications.
+              </p>
+
+              <div class="about-details">
+                <p>
+                  <i class="fas fa-code"></i> My journey includes hands-on
+                  experience in full-stack development, AI integration, and
+                  technical leadership.
+                </p>
+                <p>
+                  <i class="fas fa-users"></i> Beyond coding, I serve as PMA
+                  President and actively explore advancements in machine
+                  learning.
+                </p>
+              </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+              <div class="stat-card" data-value="9.3" data-suffix="">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Current GPA</div>
+              </div>
+              <div class="stat-card" data-value="3" data-suffix="+">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Live Projects</div>
+              </div>
+              <div class="stat-card" data-value="900" data-suffix="+">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Users Impacted</div>
+              </div>
+              <!-- <div class="stat-card" data-value="30" data-suffix="%">
+          <div class="stat-number">0</div>
+          <div class="stat-label">Performance Boost</div>
+        </div> -->
+            </div>
           </div>
         </div>
       </section>
 
       <section id="skills" class="section">
-        <h2 class="section-title fade-in-up">Skills & Technologies</h2>
-        <div class="skills-grid fade-in-up">
-          <div class="skill-category">
-            <h3><i class="fas fa-code"></i> Programming Languages</h3>
-            <div class="skill-tags">
-              <span class="skill-tag"
-                ><i class="fab fa-python"></i> Python</span
-              >
-              <span class="skill-tag"
-                ><i class="fab fa-js"></i> JavaScript</span
-              >
-              <span class="skill-tag"><i class="fab fa-java"></i> Java</span>
-              <span class="skill-tag"><i class="fab fa-php"></i> PHP</span>
-              <span class="skill-tag"><i class="fas fa-plus"></i> C++</span>
-            </div>
-          </div>
-          <div class="skill-category">
-            <h3><i class="fas fa-laptop-code"></i> Web Technologies</h3>
-            <div class="skill-tags">
-              <span class="skill-tag"><i class="fab fa-react"></i> React</span>
-              <span class="skill-tag"
-                ><i class="fab fa-python"></i> Django</span
-              >
-              <span class="skill-tag"
-                ><i class="fab fa-html5"></i> HTML/CSS</span
-              >
-              <span class="skill-tag"
-                ><i class="fab fa-bootstrap"></i> Bootstrap</span
-              >
-              <span class="skill-tag"
-                ><i class="fas fa-sync-alt"></i> AJAX</span
-              >
-            </div>
-          </div>
-          <div class="skill-category">
-            <h3><i class="fas fa-database"></i> Database & Tools</h3>
-            <div class="skill-tags">
-              <span class="skill-tag"
-                ><i class="fas fa-database"></i> MySQL</span
-              >
-              <span class="skill-tag"><i class="fas fa-plug"></i> PDO</span>
-              <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
-              <span class="skill-tag"
-                ><i class="fas fa-vector-square"></i> Vector Databases</span
-              >
-            </div>
-          </div>
-          <div class="skill-category">
-            <h3><i class="fas fa-robot"></i> AI & Machine Learning</h3>
-            <div class="skill-tags">
-              <span class="skill-tag"><i class="fas fa-brain"></i> LLMs</span>
-              <span class="skill-tag"
-                ><i class="fas fa-project-diagram"></i> TensorFlow</span
-              >
-              <span class="skill-tag"
-                ><i class="fas fa-comments"></i> Chatbot Development</span
-              >
-              <span class="skill-tag"
-                ><i class="fas fa-network-wired"></i> Deep Learning</span
-              >
-            </div>
-          </div>
+        <div class="section-header">
+          <h2 class="section-title">Skills & Technologies</h2>
+          <!-- <div class="section-divider"></div> -->
         </div>
 
-        <div class="tech-carousel fade-in-up">
-          <div class="tech-track">
-            <div class="tech-item">
-              <div class="tech-icon"><i class="fab fa-python"></i></div>
-              <div class="tech-label">Python</div>
-            </div>
-            <div class="tech-item">
-              <div class="tech-icon"><i class="fab fa-js"></i></div>
-              <div class="tech-label">JavaScript</div>
-            </div>
-            <div class="tech-item">
-              <div class="tech-icon"><i class="fab fa-react"></i></div>
-              <div class="tech-label">React</div>
-            </div>
-            <div class="tech-item">
-              <div class="tech-icon"><i class="fab fa-node-js"></i></div>
-              <div class="tech-label">Node.js</div>
-            </div>
-            <div class="tech-item">
-              <div class="tech-icon"><i class="fab fa-docker"></i></div>
-              <div class="tech-label">Docker</div>
-            </div>
-            <div class="tech-item">
-              <div class="tech-icon"><i class="fab fa-git-alt"></i></div>
-              <div class="tech-label">Git</div>
-            </div>
-            <div class="tech-item">
-              <div class="tech-icon"><i class="fas fa-database"></i></div>
-              <div class="tech-label">MySQL</div>
-            </div>
-            <div class="tech-item">
-              <div class="tech-icon"><i class="fab fa-aws"></i></div>
-              <div class="tech-label">AWS</div>
-            </div>
-            <div class="tech-item">
-              <div class="tech-icon">
-                <i class="fas fa-project-diagram"></i>
+        <div class="skills-container">
+          <!-- Skill Categories -->
+          <div class="skills-grid">
+            <div class="skill-category">
+              <div class="category-header">
+                <i class="fas fa-code category-icon"></i>
+                <h3>Programming</h3>
               </div>
-              <div class="tech-label">TensorFlow</div>
+              <div class="skills-list">
+                <div class="skill-item">
+                  <i class="fab fa-python skill-icon"></i>
+                  <span>Python</span>
+                </div>
+                <div class="skill-item">
+                  <i class="fab fa-js skill-icon"></i>
+                  <span>JavaScript</span>
+                </div>
+                <div class="skill-item">
+                  <i class="fab fa-java skill-icon"></i>
+                  <span>Java</span>
+                </div>
+                <div class="skill-item">
+                  <i class="fab fa-php skill-icon"></i>
+                  <span>PHP</span>
+                </div>
+                <div class="skill-item">
+                  <i class="fas fa-plus skill-icon"></i>
+                  <span>C++</span>
+                </div>
+              </div>
             </div>
-            <div class="tech-item">
-              <div class="tech-icon"><i class="fab fa-linux"></i></div>
-              <div class="tech-label">Linux</div>
+
+            <div class="skill-category">
+              <div class="category-header">
+                <i class="fas fa-laptop-code category-icon"></i>
+                <h3>Web Development</h3>
+              </div>
+              <div class="skills-list">
+                <div class="skill-item">
+                  <i class="fab fa-react skill-icon"></i>
+                  <span>React</span>
+                </div>
+                <div class="skill-item">
+                  <i class="fab fa-python skill-icon"></i>
+                  <span>Django</span>
+                </div>
+                <div class="skill-item">
+                  <i class="fab fa-html5 skill-icon"></i>
+                  <span>HTML/CSS</span>
+                </div>
+                <div class="skill-item">
+                  <i class="fab fa-bootstrap skill-icon"></i>
+                  <span>Bootstrap</span>
+                </div>
+                <div class="skill-item">
+                  <i class="fas fa-sync-alt skill-icon"></i>
+                  <span>AJAX</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-category">
+              <div class="category-header">
+                <i class="fas fa-database category-icon"></i>
+                <h3>Database & Tools</h3>
+              </div>
+              <div class="skills-list">
+                <div class="skill-item">
+                  <i class="fas fa-database skill-icon"></i>
+                  <span>MySQL</span>
+                </div>
+                <div class="skill-item">
+                  <i class="fas fa-plug skill-icon"></i>
+                  <span>PDO</span>
+                </div>
+                <div class="skill-item">
+                  <i class="fab fa-git-alt skill-icon"></i>
+                  <span>Git</span>
+                </div>
+                <div class="skill-item">
+                  <i class="fas fa-vector-square skill-icon"></i>
+                  <span>Vector DBs</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-category">
+              <div class="category-header">
+                <i class="fas fa-robot category-icon"></i>
+                <h3>AI & ML</h3>
+              </div>
+              <div class="skills-list">
+                <div class="skill-item">
+                  <i class="fas fa-brain skill-icon"></i>
+                  <span>LLMs</span>
+                </div>
+                <div class="skill-item">
+                  <i class="fas fa-project-diagram skill-icon"></i>
+                  <span>TensorFlow</span>
+                </div>
+                <div class="skill-item">
+                  <i class="fas fa-comments skill-icon"></i>
+                  <span>Chatbots</span>
+                </div>
+                <div class="skill-item">
+                  <i class="fas fa-network-wired skill-icon"></i>
+                  <span>Deep Learning</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tech Carousel -->
+          <div class="tech-showcase">
+            <h3 class="showcase-title">Technologies I Work With</h3>
+            <div class="tech-scroller">
+              <div class="tech-track">
+                <div class="tech-item">
+                  <div class="tech-icon"><i class="fab fa-python"></i></div>
+                  <div class="tech-label">Python</div>
+                </div>
+                <div class="tech-item">
+                  <div class="tech-icon"><i class="fab fa-js"></i></div>
+                  <div class="tech-label">JavaScript</div>
+                </div>
+                <div class="tech-item">
+                  <div class="tech-icon"><i class="fab fa-react"></i></div>
+                  <div class="tech-label">React</div>
+                </div>
+                <div class="tech-item">
+                  <div class="tech-icon"><i class="fab fa-node-js"></i></div>
+                  <div class="tech-label">Node.js</div>
+                </div>
+                <div class="tech-item">
+                  <div class="tech-icon"><i class="fab fa-docker"></i></div>
+                  <div class="tech-label">Docker</div>
+                </div>
+                <div class="tech-item">
+                  <div class="tech-icon"><i class="fab fa-aws"></i></div>
+                  <div class="tech-label">AWS</div>
+                </div>
+                <div class="tech-item">
+                  <div class="tech-icon"><i class="fas fa-database"></i></div>
+                  <div class="tech-label">MySQL</div>
+                </div>
+                <div class="tech-item">
+                  <div class="tech-icon"><i class="fab fa-git-alt"></i></div>
+                  <div class="tech-label">Git</div>
+                </div>
+                <div class="tech-item">
+                  <div class="tech-icon">
+                    <i class="fas fa-project-diagram"></i>
+                  </div>
+                  <div class="tech-label">TensorFlow</div>
+                </div>
+                <div class="tech-item">
+                  <div class="tech-icon"><i class="fab fa-linux"></i></div>
+                  <div class="tech-label">Linux</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -265,7 +376,7 @@
                 <a href="#" class="project-link">
                   <i class="fas fa-external-link-alt"></i> Live Demo
                 </a>
-                <a href="#" class="project-link">
+                <a href="https://github.com/utkarshrajputt/rag-chatbot" class="project-link" target="_blank"> 
                   <i class="fab fa-github"></i> GitHub
                 </a>
               </div>
@@ -295,10 +406,10 @@
                 <a href="#" class="project-link view-project" data-project="2">
                   <i class="fas fa-eye"></i> View Details
                 </a>
-                <a href="#" class="project-link">
+                <a href="https://shopeasestore.pythonanywhere.com/" class="project-link" target="_blank">
                   <i class="fas fa-external-link-alt"></i> Live Demo
                 </a>
-                <a href="#" class="project-link">
+                <a href="https://github.com/utkarshrajputt/shopease" class="project-link" target="_blank">
                   <i class="fab fa-github"></i> GitHub
                 </a>
               </div>
@@ -328,10 +439,10 @@
                 <a href="#" class="project-link view-project" data-project="3">
                   <i class="fas fa-eye"></i> View Details
                 </a>
-                <a href="#" class="project-link">
+                <a href="http://202.129.240.162:8081/student/student_login.php" class="project-link" target="_blank">
                   <i class="fas fa-external-link-alt"></i> Live Demo
                 </a>
-                <a href="#" class="project-link">
+                <a href="https://github.com/utkarshrajputt/semcom_portal" class="project-link" target="_blank">
                   <i class="fab fa-github"></i> GitHub
                 </a>
               </div>
@@ -360,10 +471,10 @@
                 <a href="#" class="project-link view-project" data-project="4">
                   <i class="fas fa-eye"></i> View Details
                 </a>
-                <a href="#" class="project-link">
+                <a href="http://www.blogo-ut.infinityfreeapp.com/home.php?i=2" class="project-link" target="_blank">
                   <i class="fas fa-external-link-alt"></i> Live Demo
                 </a>
-                <a href="#" class="project-link">
+                <a href="https://github.com/utkarshrajputt/Blogo" class="project-link" target="_blank">
                   <i class="fab fa-github"></i> GitHub
                 </a>
               </div>
@@ -390,153 +501,38 @@
                 <span class="tech-tag">AI Motivation</span>
               </div>
               <div class="project-links">
-                <a
-                  href="#leetcode-modal"
-                  class="project-link view-project"
-                  data-project="leetcode"
-                >
-                  <i class="fas fa-info-circle"></i> Details
+                <a href="#" class="project-link view-project" data-project="5">
+                  <i class="fas fa-eye"></i> View Details
                 </a>
-                <a
-                  href="https://github.com/yourusername/leetcode-streak-bot"
-                  class="project-link"
-                  target="_blank"
-                >
-                  <i class="fab fa-github"></i> Code
+                <a href="https://t.me/utkarsh_streak_bot" class="project-link" target="_blank">
+                  <i class="fas fa-robot"></i> Live Demo
                 </a>
-                <a
-                  href="https://t.me/your_bot"
-                  class="project-link"
-                  target="_blank"
-                >
-                  <i class="fas fa-robot"></i> Demo
+                <a href="https://github.com/utkarshrajputt/leetcode-streak-checker" class="project-link" target="_blank">
+                  <i class="fab fa-github"></i> GitHub
                 </a>
               </div>
+              
             </div>
           </div>
         </div>
       </section>
 
       <!-- Project Modals -->
-      <div class="modal" id="projectModal">
+      <!-- Single Modal Template (Will be populated dynamically) -->
+      <div class="modal" id="dynamicModal">
         <div class="modal-content">
           <div class="modal-header">
             <h3 id="modalTitle">Project Title</h3>
             <button class="modal-close">&times;</button>
           </div>
           <div class="modal-body">
-            <div class="modal-images">
-              <div class="modal-image">
-                <img
-                  src="https://via.placeholder.com/600x400"
-                  alt="Project Screenshot"
-                />
-              </div>
-              <div class="modal-image">
-                <img
-                  src="https://via.placeholder.com/600x400"
-                  alt="Project Screenshot"
-                />
-              </div>
-              <div class="modal-image">
-                <img
-                  src="https://via.placeholder.com/600x400"
-                  alt="Project Screenshot"
-                />
-              </div>
-            </div>
-            <div id="modalDescription">
-              <p>
-                Project description goes here with more details about the
-                implementation, challenges faced, and solutions developed.
-              </p>
-              <p>
-                Additional technical details and features can be listed here.
-              </p>
-            </div>
-            <div class="project-tech" id="modalTech">
-              <span class="tech-tag">Technology</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="project-link" id="modalLiveLink">
-                <i class="fas fa-external-link-alt"></i> Live Demo
-              </a>
-              <a href="#" class="project-link" id="modalGithubLink">
-                <i class="fab fa-github"></i> GitHub
-              </a>
-            </div>
+            <div class="modal-images" id="modalImages"></div>
+            <div id="modalDescription"></div>
+            <div class="project-tech" id="modalTech"></div>
+            <div class="project-links" id="modalLinks"></div>
           </div>
         </div>
       </div>
-      <div class="modal" id="leetcode-modal">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3>LeetCode Streak Checker Bot</h3>
-            <button class="modal-close">&times;</button>
-          </div>
-          <div class="modal-body">
-            <div class="modal-images">
-              <div class="modal-image">
-                <img
-                  src="https://via.placeholder.com/600x400?text=Bot+Demo+Screenshot"
-                  alt="Bot in action"
-                />
-              </div>
-              <div class="modal-image">
-                <img
-                  src="https://via.placeholder.com/600x400?text=GitHub+Action+Workflow"
-                  alt="Workflow setup"
-                />
-              </div>
-            </div>
-
-            <div class="feature-list">
-              <h4><i class="fas fa-bolt"></i> Key Features</h4>
-              <ul>
-                <li>Daily automated streak checks via GitHub Actions</li>
-                <li>Personalized motivational/humiliating messages</li>
-                <li>Secure credential management using GitHub Secrets</li>
-                <li>Real-time Telegram notifications</li>
-                <li>100% serverless architecture</li>
-              </ul>
-
-              <h4><i class="fas fa-cogs"></i> How It Works</h4>
-              <ol>
-                <li>Runs daily at 10:45 PM IST via cron job</li>
-                <li>Checks your last 5 LeetCode submissions</li>
-                <li>Verifies if any were submitted today</li>
-                <li>Sends appropriate Telegram message</li>
-              </ol>
-            </div>
-
-            <div class="project-tech">
-              <span class="tech-tag">Python 3.10</span>
-              <span class="tech-tag">GitHub Actions</span>
-              <span class="tech-tag">GraphQL</span>
-              <span class="tech-tag">Telegram Bot API</span>
-              <span class="tech-tag">LeetCode API</span>
-            </div>
-
-            <div class="project-links">
-              <a
-                href="https://github.com/yourusername/leetcode-streak-bot"
-                class="project-link"
-                target="_blank"
-              >
-                <i class="fab fa-github"></i> View on GitHub
-              </a>
-              <a
-                href="https://t.me/your_bot"
-                class="project-link"
-                target="_blank"
-              >
-                <i class="fas fa-robot"></i> Try Live Demo
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
 
       <section id="experience" class="section">
         <h2 class="section-title fade-in-up">Professional Journey</h2>
@@ -550,7 +546,7 @@
               </div>
               <h3>Professional Experience</h3>
             </div>
-          
+
             <div class="experience-list">
               <!-- Item 1 -->
               <div class="experience-item fade-in-up">
@@ -564,13 +560,15 @@
                     </span>
                   </div>
                   <p class="exp-desc">
-                    Building a production-grade AI chatbot using LLMs (Mistral, Phi-2) with vector stores (FAISS). 
-                    Reduced query latency by 30% via custom embedding caching logic. 
-                    Integrated Hugging Face Transformers into a scalable pipeline on limited hardware (GTX 1650).
+                    Building a production-grade AI chatbot using LLMs (Mistral,
+                    Phi-2) with vector stores (FAISS). Reduced query latency by
+                    30% via custom embedding caching logic. Integrated Hugging
+                    Face Transformers into a scalable pipeline on limited
+                    hardware (GTX 1650).
                   </p>
                 </div>
               </div>
-          
+
               <!-- Item 2 -->
               <div class="experience-item fade-in-up">
                 <div class="exp-dot tech-dot"></div>
@@ -583,12 +581,15 @@
                     </span>
                   </div>
                   <p class="exp-desc">
-                    Engineered the NEEV Portal serving <b>900+ students</b> with features like role-based dashboards, PDF/Excel reports, attendance uploads, and secure student logins.
-                    Automated resource workflows and enhanced admin control, boosting faculty engagement by 60%.
+                    Engineered the NEEV Portal serving <b>900+ students</b> with
+                    features like role-based dashboards, PDF/Excel reports,
+                    attendance uploads, and secure student logins. Automated
+                    resource workflows and enhanced admin control, boosting
+                    faculty engagement by 60%.
                   </p>
                 </div>
               </div>
-          
+
               <!-- Item 3 -->
               <div class="experience-item fade-in-up">
                 <div class="exp-dot tech-dot"></div>
@@ -601,14 +602,14 @@
                     </span>
                   </div>
                   <p class="exp-desc">
-                    Developed responsive, single-page apps using React.js and React Router DOM. 
-                    Delivered pixel-perfect UI with advanced CSS media queries and ensured cross-device compatibility.
+                    Developed responsive, single-page apps using React.js and
+                    React Router DOM. Delivered pixel-perfect UI with advanced
+                    CSS media queries and ensured cross-device compatibility.
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          
 
           <!-- Leadership Column -->
           <div class="leadership-column">
@@ -803,13 +804,17 @@
             <a href="mailto:utkarshrajput1583@gmail.com" class="social-link">
               <i class="fas fa-envelope"></i>
             </a>
-            <a href="https://x.com/Utkarshrajputtt" class="social-link" target="_blank">
+            <a
+              href="https://x.com/Utkarshrajputtt"
+              class="social-link"
+              target="_blank"
+            >
               <i class="fab fa-twitter"></i>
             </a>
           </div>
           <div class="resume-download">
             <a
-             href="assets/resume/Utkarsh_Rajput_MCA_Resume_2025.pdf"
+              href="assets/resume/Utkarsh_Rajput_MCA_Resume_2025.pdf"
               download
               class="btn btn-secondary"
             >
@@ -844,22 +849,104 @@
       </div>
     </div>
 
+    <!-- Floating Social Bar -->
+    <div class="floating-social">
+      <div class="social-linkss">
+        <a
+          href="https://github.com/utkarshrajputt"
+          target="_blank"
+          class="social-icon"
+          aria-label="GitHub"
+        >
+          <i class="fab fa-github"></i>
+        </a>
+        <a
+          href="https://linkedin.com/in/utkarshrajputt"
+          target="_blank"
+          class="social-icon"
+          aria-label="LinkedIn"
+        >
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a
+          href="https://x.com/Utkarshrajputtt"
+          target="_blank"
+          class="social-icon"
+          aria-label="Twitter"
+        >
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a
+          href="mailto:utkarshrajput1583@gmail.com"
+          class="social-icon"
+          aria-label="Email"
+        >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+
     <footer>
-        <div class="footer-content">
-          <div class="footer-links">
-            <a href="#home" class="footer-link">Home</a>
-            <a href="#about" class="footer-link">About</a>
-            <a href="#projects" class="footer-link">Projects</a>
-            <a href="#blog" class="footer-link">Blog</a>
-            <a href="#contact" class="footer-link">Contact</a>
-          </div>
-          <p class="copyright">
-            &copy; 2025 Utkarsh Rajput. Crafted with passion and code.
-          </p>
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#home" class="footer-link">Home</a>
+          <a href="#about" class="footer-link">About</a>
+          <a href="#projects" class="footer-link">Projects</a>
+          <a href="#blog" class="footer-link">Blog</a>
+          <a href="#contact" class="footer-link">Contact</a>
         </div>
-      </footer>
+        <p class="copyright">
+          &copy; 2025 Utkarsh Rajput. Crafted with passion and code.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Greeting Loader -->
+    <div class="greeting-loader">
+      <div class="greeting-text"></div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="assets/js/script.js"></script><!-- Add this line -->
-</body>
+    <script src="assets/js/script.js"></script>
+
+    <script>
+      document
+        .querySelector(".python-command")
+        .addEventListener("click", () => {
+          window.location.href = "#projects"; // Or #contact
+        });
+    </script>
+    <script>
+      // Multilingual Greetings
+      const greetings = ["नमस्ते", "કેમ છો", "Hello", "Bonjour", "こんにちは"];
+      let currentGreeting = 0;
+
+      const loader = document.querySelector(".greeting-loader");
+      const greetingText = document.querySelector(".greeting-text");
+
+      // Cycle through greetings
+      function showNextGreeting() {
+        if (currentGreeting < greetings.length) {
+          greetingText.style.animation = "none";
+          void greetingText.offsetWidth; // Trigger reflow
+          greetingText.style.animation = "textFade 0.3s ease forwards";
+          greetingText.textContent = greetings[currentGreeting];
+          currentGreeting++;
+          setTimeout(showNextGreeting, 200); // Speed (adjust as needed)
+        } else {
+          loader.style.opacity = "0";
+          setTimeout(() => {
+            loader.remove();
+            document.body.style.overflow = "auto"; // Re-enable scrolling
+          }, 500);
+        }
+      }
+
+      // Start on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        document.body.style.overflow = "hidden"; // Disable scroll during loader
+        setTimeout(showNextGreeting, 300);
+      });
+    </script>
+  </body>
 </html>
