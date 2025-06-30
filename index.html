@@ -35,11 +35,12 @@
 
           <!-- Navigation Links -->
           <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#experience" class="nav-link">Experience</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
           </ul>
 
           <!-- Right-Aligned Items -->
@@ -56,7 +57,7 @@
                 <i class="fas fa-sun"></i>
               </span>
             </button>
-            <button class="mobile-menu-toggle">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
               <span></span>
               <span></span>
               <span></span>
@@ -80,14 +81,36 @@
           <h1 class="hero-title">
             Hi, I'm <span class="name-gradient">Utkarsh Rajput</span>
           </h1>
-          <p class="hero-subtitle">
-            Python FullStack Developer | Turning ideas into scalable solutions.
+          <div class="subtitle-container">
+            <p class="hero-subtitle">
+              <span id="typing-text">Full Stack Developer</span>
+              <span class="typing-cursor">|</span>
+            </p>
+          </div>
+
+          <!-- Description -->
+          <p class="hero-description">
+            Turning ideas into scalable solutions with <span class="highlight">Python</span>, 
+            <span class="highlight">AI</span>, and modern web technologies.
           </p>
 
-          <!-- "pip install" CTA -->
-          <div class="python-command fade-in-up">
-            <span class="command-prefix">$</span>
-            <span class="command-text">pip install utkarshrajput</span>
+          <!-- CTA Buttons -->
+          <div class="cta-container">
+            <a href="#projects" class="cta-btn primary">
+              <i class="fas fa-code"></i> View My Work
+            </a>
+            <a href="#contact" class="cta-btn secondary">
+              <i class="fas fa-paper-plane"></i> Let's Connect
+            </a>
+          </div>
+
+          <!-- Scroll Indicator -->
+           <br><br>
+          <div class="scroll-indicator">
+            <span>Scroll Down</span>
+            <div class="scroll-arrow">
+              <i class="fas fa-chevron-down"></i>
+            </div>
           </div>
         </div>
       </section>
@@ -95,7 +118,7 @@
       <section id="about" class="section">
         <div class="section-header">
           <h2 class="section-title">About Me</h2>
-          <!-- <div class="section-divider"></div> -->
+          <div class="section-divider"></div>
         </div>
 
         <div class="about-container">
@@ -144,23 +167,19 @@
             </div>
 
             <!-- Stats Grid -->
-            <div class="stats-grid">
-              <div class="stat-card" data-value="9.3" data-suffix="">
-                <div class="stat-number">0</div>
+            <div class="stats-grid fade-in-up">
+              <div class="stat-card">
+                <div class="stat-number" data-count="9.3" data-suffix="">0</div>
                 <div class="stat-label">Current GPA</div>
               </div>
-              <div class="stat-card" data-value="3" data-suffix="+">
-                <div class="stat-number">0</div>
+              <div class="stat-card">
+                <div class="stat-number" data-count="3" data-suffix="+">0</div>
                 <div class="stat-label">Live Projects</div>
               </div>
-              <div class="stat-card" data-value="900" data-suffix="+">
-                <div class="stat-number">0</div>
+              <div class="stat-card">
+                <div class="stat-number" data-count="900" data-suffix="+">0</div>
                 <div class="stat-label">Users Impacted</div>
               </div>
-              <!-- <div class="stat-card" data-value="30" data-suffix="%">
-          <div class="stat-number">0</div>
-          <div class="stat-label">Performance Boost</div>
-        </div> -->
             </div>
           </div>
         </div>
@@ -352,7 +371,7 @@
         </div>
         <div class="projects-grid fade-in-up">
           <!-- Project 1: AI ChatBot -->
-          <div class="project-card" data-category="ai">
+          <div class="project-card" data-category="ai" data-project="1">
             <div class="project-header">
               <h3 class="project-title">AI ChatBot</h3>
               <p class="project-subtitle">Intelligent Document Processing</p>
@@ -373,18 +392,12 @@
                 <a href="#" class="project-link view-project" data-project="1">
                   <i class="fas fa-eye"></i> View Details
                 </a>
-                <a href="#" class="project-link">
-                  <i class="fas fa-external-link-alt"></i> Live Demo
-                </a>
-                <a href="https://github.com/utkarshrajputt/rag-chatbot" class="project-link" target="_blank"> 
-                  <i class="fab fa-github"></i> GitHub
-                </a>
               </div>
             </div>
           </div>
 
           <!-- Project 2: ShopEase -->
-          <div class="project-card" data-category="fullstack web">
+          <div class="project-card" data-category="fullstack web" data-project="2">
             <div class="project-header">
               <h3 class="project-title">ShopEase</h3>
               <p class="project-subtitle">E-commerce Marketplace</p>
@@ -406,18 +419,12 @@
                 <a href="#" class="project-link view-project" data-project="2">
                   <i class="fas fa-eye"></i> View Details
                 </a>
-                <a href="https://shopeasestore.pythonanywhere.com/" class="project-link" target="_blank">
-                  <i class="fas fa-external-link-alt"></i> Live Demo
-                </a>
-                <a href="https://github.com/utkarshrajputt/shopease" class="project-link" target="_blank">
-                  <i class="fab fa-github"></i> GitHub
-                </a>
               </div>
             </div>
           </div>
 
           <!-- Project 3: NEEV Portal -->
-          <div class="project-card" data-category="web">
+          <div class="project-card" data-category="web" data-project="3">
             <div class="project-header">
               <h3 class="project-title">NEEV Portal</h3>
               <p class="project-subtitle">Student Profiling System</p>
@@ -439,18 +446,12 @@
                 <a href="#" class="project-link view-project" data-project="3">
                   <i class="fas fa-eye"></i> View Details
                 </a>
-                <a href="http://202.129.240.162:8081/student/student_login.php" class="project-link" target="_blank">
-                  <i class="fas fa-external-link-alt"></i> Live Demo
-                </a>
-                <a href="https://github.com/utkarshrajputt/semcom_portal" class="project-link" target="_blank">
-                  <i class="fab fa-github"></i> GitHub
-                </a>
               </div>
             </div>
           </div>
 
           <!-- Project 4: BLogSite -->
-          <div class="project-card" data-category="web">
+          <div class="project-card" data-category="web" data-project="4">
             <div class="project-header">
               <h3 class="project-title">BLogSite</h3>
               <p class="project-subtitle">Interactive Blogging Platform</p>
@@ -471,18 +472,12 @@
                 <a href="#" class="project-link view-project" data-project="4">
                   <i class="fas fa-eye"></i> View Details
                 </a>
-                <a href="http://www.blogo-ut.infinityfreeapp.com/home.php?i=2" class="project-link" target="_blank">
-                  <i class="fas fa-external-link-alt"></i> Live Demo
-                </a>
-                <a href="https://github.com/utkarshrajputt/Blogo" class="project-link" target="_blank">
-                  <i class="fab fa-github"></i> GitHub
-                </a>
               </div>
             </div>
           </div>
 
           <!-- LeetCode Streak Alert -->
-          <div class="project-card" data-category="automation ai">
+          <div class="project-card" data-category="automation ai" data-project="5">
             <div class="project-header">
               <h3 class="project-title">LeetCode Streak Bot</h3>
               <p class="project-subtitle">AI-Powered Accountability System</p>
@@ -504,12 +499,6 @@
                 <a href="#" class="project-link view-project" data-project="5">
                   <i class="fas fa-eye"></i> View Details
                 </a>
-                <a href="https://t.me/utkarsh_streak_bot" class="project-link" target="_blank">
-                  <i class="fas fa-robot"></i> Live Demo
-                </a>
-                <a href="https://github.com/utkarshrajputt/leetcode-streak-checker" class="project-link" target="_blank">
-                  <i class="fab fa-github"></i> GitHub
-                </a>
               </div>
               
             </div>
@@ -519,17 +508,25 @@
 
       <!-- Project Modals -->
       <!-- Single Modal Template (Will be populated dynamically) -->
-      <div class="modal" id="dynamicModal">
+      <div class="modal" id="projectModal">
         <div class="modal-content">
           <div class="modal-header">
             <h3 id="modalTitle">Project Title</h3>
-            <button class="modal-close">&times;</button>
+            <button class="close">&times;</button>
           </div>
           <div class="modal-body">
             <div class="modal-images" id="modalImages"></div>
             <div id="modalDescription"></div>
-            <div class="project-tech" id="modalTech"></div>
-            <div class="project-links" id="modalLinks"></div>
+            <div class="project-tech" id="modalTechnologies"></div>
+            <div class="modal-features" id="modalFeatures"></div>
+            <div class="project-links" id="modalLinks">
+              <a href="#" id="liveDemoBtn" class="project-link" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+              <a href="#" id="githubBtn" class="project-link" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -550,7 +547,9 @@
             <div class="experience-list">
               <!-- Item 1 -->
               <div class="experience-item fade-in-up">
-                <div class="exp-dot tech-dot"></div>
+                <div class="exp-dot tech-dot">
+                  <i class="fas fa-code"></i>
+                </div>
                 <div class="exp-content">
                   <h4>Trainee Data Science Engineer</h4>
                   <div class="exp-meta">
@@ -571,7 +570,9 @@
 
               <!-- Item 2 -->
               <div class="experience-item fade-in-up">
-                <div class="exp-dot tech-dot"></div>
+                <div class="exp-dot tech-dot">
+                  <i class="fas fa-server"></i>
+                </div>
                 <div class="exp-content">
                   <h4>Backend Developer Intern</h4>
                   <div class="exp-meta">
@@ -592,7 +593,9 @@
 
               <!-- Item 3 -->
               <div class="experience-item fade-in-up">
-                <div class="exp-dot tech-dot"></div>
+                <div class="exp-dot tech-dot">
+                  <i class="fas fa-laptop-code"></i>
+                </div>
                 <div class="exp-content">
                   <h4>Web Development Intern</h4>
                   <div class="exp-meta">
@@ -623,7 +626,9 @@
             <div class="experience-list">
               <!-- PMA President -->
               <div class="experience-item fade-in-up">
-                <div class="exp-dot leader-dot"></div>
+                <div class="exp-dot leader-dot">
+                  <i class="fas fa-crown"></i>
+                </div>
                 <div class="exp-content">
                   <h4>President, PMA</h4>
                   <div class="exp-meta">
@@ -647,7 +652,9 @@
 
               <!-- TNP Core Member -->
               <div class="experience-item fade-in-up">
-                <div class="exp-dot leader-dot"></div>
+                <div class="exp-dot leader-dot">
+                  <i class="fas fa-handshake"></i>
+                </div>
                 <div class="exp-content">
                   <h4>Core Member, T&P Cell</h4>
                   <div class="exp-meta">
@@ -669,7 +676,9 @@
 
               <!-- Deputy General Secretary -->
               <div class="experience-item fade-in-up">
-                <div class="exp-dot leader-dot"></div>
+                <div class="exp-dot leader-dot">
+                  <i class="fas fa-graduation-cap"></i>
+                </div>
                 <div class="exp-content">
                   <h4>Deputy General Secretary</h4>
                   <div class="exp-meta">
@@ -688,7 +697,9 @@
 
               <!-- AIESEC Volunteer -->
               <div class="experience-item fade-in-up">
-                <div class="exp-dot leader-dot"></div>
+                <div class="exp-dot leader-dot">
+                  <i class="fas fa-globe-americas"></i>
+                </div>
                 <div class="exp-content">
                   <h4>Global Volunteer</h4>
                   <div class="exp-meta">
@@ -768,56 +779,69 @@
       <section id="contact" class="section contact">
         <h2 class="section-title fade-in-up">Let's Connect</h2>
         <div class="contact-content fade-in-up">
-          <p style="font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9">
-            Ready to collaborate on innovative projects or discuss
-            opportunities? I'd love to hear from you!
+          <p class="contact-intro">
+            Ready to collaborate on innovative projects or discuss opportunities? I'd love to hear from you!
           </p>
-          <div class="contact-info">
+          
+          <div class="contact-info-grid">
             <div class="contact-item">
-              <i class="fas fa-envelope"></i>
-              <h3>Email</h3>
-              <a href="mailto:utkarshrajput1583@gmail.com"
-                >utkarshrajput1583@gmail.com</a
-              >
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="contact-details">
+                <h3>Email</h3>
+                <a href="mailto:utkarshrajput1583@gmail.com">utkarshrajput1583@gmail.com</a>
+              </div>
             </div>
+            
             <div class="contact-item">
-              <i class="fas fa-map-marker-alt"></i>
-              <h3>Location</h3>
-              <p>Pune, India</p>
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="contact-details">
+                <h3>Location</h3>
+                <p>Pune, India</p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fab fa-linkedin"></i>
+              </div>
+              <div class="contact-details">
+                <h3>LinkedIn</h3>
+                <a href="https://linkedin.com/in/utkarshrajputt" target="_blank">Connect with me</a>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fab fa-github"></i>
+              </div>
+              <div class="contact-details">
+                <h3>GitHub</h3>
+                <a href="https://github.com/utkarshrajputt" target="_blank">View my code</a>
+              </div>
             </div>
           </div>
+          
           <div class="social-links">
-            <a
-              href="https://linkedin.com/in/utkarshrajputt"
-              class="social-link"
-              target="_blank"
-            >
+            <a href="https://linkedin.com/in/utkarshrajputt" class="social-link" target="_blank" aria-label="LinkedIn">
               <i class="fab fa-linkedin-in"></i>
             </a>
-            <a
-              href="https://github.com/utkarshrajputt"
-              class="social-link"
-              target="_blank"
-            >
+            <a href="https://github.com/utkarshrajputt" class="social-link" target="_blank" aria-label="GitHub">
               <i class="fab fa-github"></i>
             </a>
-            <a href="mailto:utkarshrajput1583@gmail.com" class="social-link">
+            <a href="mailto:utkarshrajput1583@gmail.com" class="social-link" aria-label="Email">
               <i class="fas fa-envelope"></i>
             </a>
-            <a
-              href="https://x.com/Utkarshrajputtt"
-              class="social-link"
-              target="_blank"
-            >
+            <a href="https://x.com/Utkarshrajputtt" class="social-link" target="_blank" aria-label="Twitter">
               <i class="fab fa-twitter"></i>
             </a>
           </div>
+          
           <div class="resume-download">
-            <a
-              href="assets/resume/Utkarsh_Rajput_MCA_Resume_2025.pdf"
-              download
-              class="btn btn-secondary"
-            >
+            <a href="assets/resume/Utkarsh_Rajput_MCA_Resume_2025.pdf" download class="btn btn-secondary">
               <i class="fas fa-download"></i> Download Full Resume (PDF)
             </a>
           </div>
@@ -825,27 +849,47 @@
       </section>
     </main>
 
-    <!-- Chatbot Widget -->
-    <button class="chatbot-toggle" id="chatbotToggle">
+    <!-- Enhanced Chatbot Widget -->
+    <button class="chatbot-toggle" id="chatbotToggle" aria-label="Open AI Assistant">
       <i class="fas fa-robot"></i>
     </button>
     <div class="chatbot-container" id="chatbotContainer">
       <div class="chatbot-header">
-        <h3>AI Assistant</h3>
-        <button class="chatbot-close" id="chatbotClose">&times;</button>
+        <div class="chatbot-header-content">
+          <div class="chatbot-avatar">
+            <i class="fas fa-brain"></i>
+          </div>
+          <div class="chatbot-header-text">
+            <h3>AI Assistant</h3>
+            <div class="chatbot-status">
+              <span class="status-dot"></span>
+              Online - Ready to help
+            </div>
+          </div>
+        </div>
+        <button class="chatbot-close" id="chatbotClose" aria-label="Close chat">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
       <div class="chatbot-messages" id="chatbotMessages">
-        <div class="message bot-message">
-          Hi there! I'm your AI assistant. How can I help you today?
+        <div class="typing-indicator" id="typingIndicator">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
         </div>
       </div>
       <div class="chatbot-input">
-        <input
-          type="text"
-          placeholder="Type your message..."
-          id="chatbotInput"
-        />
-        <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+        <div class="input-wrapper">
+          <input
+            type="text"
+            placeholder="Ask me about Utkarsh's skills, projects, or experience..."
+            id="chatbotInput"
+            maxlength="500"
+          />
+        </div>
+        <button class="send-button" id="chatbotSend" aria-label="Send message">
+          <i class="fas fa-paper-plane"></i>
+        </button>
       </div>
     </div>
 
@@ -891,8 +935,9 @@
         <div class="footer-links">
           <a href="#home" class="footer-link">Home</a>
           <a href="#about" class="footer-link">About</a>
+          <a href="#skills" class="footer-link">Skills</a>
           <a href="#projects" class="footer-link">Projects</a>
-          <a href="#blog" class="footer-link">Blog</a>
+          <a href="#experience" class="footer-link">Experience</a>
           <a href="#contact" class="footer-link">Contact</a>
         </div>
         <p class="copyright">
@@ -901,51 +946,115 @@
       </div>
     </footer>
 
-    <!-- Greeting Loader -->
-    <div class="greeting-loader">
-      <div class="greeting-text"></div>
-    </div>
+    <!-- Enhanced Greeting Loader -->
+      <div class="greeting-loader">
+        <div class="greeting-container">
+          <div class="greeting-text"></div>
+          <div class="greeting-subtitle">Welcome to my digital space</div>
+          <div class="loader-dots">
+            <div class="loader-dot"></div>
+            <div class="loader-dot"></div>
+            <div class="loader-dot"></div>
+          </div>
+        </div>
+        <div class="loader-progress"></div>
+      </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="assets/js/script.js"></script>
 
     <script>
-      document
-        .querySelector(".python-command")
-        .addEventListener("click", () => {
-          window.location.href = "#projects"; // Or #contact
-        });
+      // Make python header clickable to navigate to projects
+      document.addEventListener("DOMContentLoaded", function() {
+        const pythonHeader = document.querySelector(".python-header");
+        if (pythonHeader) {
+          pythonHeader.style.cursor = "pointer";
+          pythonHeader.addEventListener("click", () => {
+            window.location.href = "#projects";
+          });
+          pythonHeader.setAttribute("title", "Click to view projects");
+        }
+      });
     </script>
     <script>
-      // Multilingual Greetings
-      const greetings = ["नमस्ते", "કેમ છો", "Hello", "Bonjour", "こんにちは"];
-      let currentGreeting = 0;
-
-      const loader = document.querySelector(".greeting-loader");
-      const greetingText = document.querySelector(".greeting-text");
-
-      // Cycle through greetings
-      function showNextGreeting() {
-        if (currentGreeting < greetings.length) {
-          greetingText.style.animation = "none";
-          void greetingText.offsetWidth; // Trigger reflow
-          greetingText.style.animation = "textFade 0.3s ease forwards";
-          greetingText.textContent = greetings[currentGreeting];
-          currentGreeting++;
-          setTimeout(showNextGreeting, 200); // Speed (adjust as needed)
-        } else {
-          loader.style.opacity = "0";
-          setTimeout(() => {
-            loader.remove();
-            document.body.style.overflow = "auto"; // Re-enable scrolling
-          }, 500);
-        }
-      }
-
-      // Start on page load
+      // Fast & Smooth Greeting Loader
       document.addEventListener("DOMContentLoaded", () => {
-        document.body.style.overflow = "hidden"; // Disable scroll during loader
-        setTimeout(showNextGreeting, 300);
+        const greetings = [
+          { text: "नमस्ते", lang: "Hindi" },
+          { text: "Hello", lang: "English" },
+          { text: "こんにちは", lang: "Japanese" }
+        ];
+        
+        let currentIndex = 0;
+        const loader = document.querySelector(".greeting-loader");
+        const greetingText = document.querySelector(".greeting-text");
+        const subtitle = document.querySelector(".greeting-subtitle");
+        
+        // Ensure loader is visible
+        if (loader) {
+          loader.style.display = 'flex';
+          loader.style.opacity = '1';
+        }
+        
+        // Disable scrolling
+        document.body.style.overflow = "hidden";
+        
+        // Create fewer, faster particles
+        function createParticles() {
+          const particleCount = 6;
+          for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'loader-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            particle.style.animationDuration = (2 + Math.random() * 1) + 's';
+            loader.appendChild(particle);
+          }
+        }
+        
+        createParticles();
+        
+        function showGreeting() {
+          if (currentIndex < greetings.length) {
+            const greeting = greetings[currentIndex];
+            
+            // Set text content with faster animation
+            greetingText.textContent = greeting.text;
+            greetingText.style.opacity = '1';
+            greetingText.style.animation = 'textSlideIn 0.5s ease forwards';
+            
+            // Update subtitle
+            if (currentIndex > 0) {
+              subtitle.textContent = `${greeting.lang} - Welcome to my digital space`;
+            }
+            
+            currentIndex++;
+            
+            setTimeout(() => {
+              if (currentIndex < greetings.length) {
+                greetingText.style.animation = 'textSlideOut 0.3s ease forwards';
+                setTimeout(showGreeting, 350);
+              } else {
+                finishLoader();
+              }
+            }, 500); // Much faster timing
+          }
+        }
+        
+        function finishLoader() {
+          // Quick fade out
+          loader.style.opacity = '0';
+          loader.style.transform = 'scale(1.05)';
+          
+          setTimeout(() => {
+            loader.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.body.classList.add('loaded');
+          }, 400); // Faster cleanup
+        }
+        
+        // Start immediately
+        setTimeout(showGreeting, 200);
       });
     </script>
   </body>

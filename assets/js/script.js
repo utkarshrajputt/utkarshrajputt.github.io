@@ -1,830 +1,1066 @@
-// Typing Animation Script (add before </body>)
 document.addEventListener("DOMContentLoaded", function () {
-  const subtitles = [
-    "Full Stack Developer",
-    "AI Enthusiast",
-    "Tech Leader",
-    "Problem Solver",
-  ];
-  let currentSubtitle = 0;
-  let currentChar = 0;
-  let isDeleting = false;
-  const typingElement = document.getElementById("typing-text");
+  // Initialize all features
+  initTypingAnimation();
+  initMobileMenu();
+  initThemeToggle();
+  initSmoothScrolling();
+  initScrollAnimations();
+  initActiveNavigation();
+  initProjectModal();
+  initProjectFiltering();
+  initChatbot();
+  initCounterAnimations();
+  initKeyboardNavigation();
+  initAccessibilityFeatures();
+  initErrorHandling();
+  
+  // Initialize particles after other critical features
+  setTimeout(() => {
+    initParticles();
+  }, 500);
 
-  function type() {
-    const fullText = subtitles[currentSubtitle];
+  // Typing Animation
+  function initTypingAnimation() {
+    const subtitles = [
+      "Full Stack Developer",
+      "AI Enthusiast", 
+      "Tech Leader",
+      "Problem Solver",
+    ];
+    let currentSubtitle = 0;
+    let currentChar = 0;
+    let isDeleting = false;
+    const typingElement = document.getElementById("typing-text");
 
-    if (isDeleting) {
-      typingElement.textContent = fullText.substring(0, currentChar - 1);
-      currentChar--;
-    } else {
-      typingElement.textContent = fullText.substring(0, currentChar + 1);
-      currentChar++;
-    }
-
-    let typeSpeed = 100;
-
-    if (isDeleting) {
-      typeSpeed /= 2;
-    }
-
-    if (!isDeleting && currentChar === fullText.length) {
-      typeSpeed = 2000;
-      isDeleting = true;
-    } else if (isDeleting && currentChar === 0) {
-      isDeleting = false;
-      currentSubtitle = (currentSubtitle + 1) % subtitles.length;
-      typeSpeed = 500;
-    }
-
-    setTimeout(type, typeSpeed);
-  }
-
-  setTimeout(type, 1000);
-
-  // Initialize particles.js if available
-  if (typeof particlesJS !== "undefined") {
-    particlesJS.load(
-      "particles-js",
-      "assets/particles-config.json",
-      function () {
-        console.log("Particles loaded");
-      }
-    );
-  }
-});
-document.addEventListener("DOMContentLoaded", function () {
-  // Mobile menu toggle
-  const mobileToggle = document.querySelector(".mobile-menu-toggle");
-  const navLinks = document.querySelector(".nav-links");
-
-  if (mobileToggle && navLinks) {
-    mobileToggle.addEventListener("click", function () {
-      this.classList.toggle("active");
-      navLinks.classList.toggle("active");
-    });
-
-    // Close menu when clicking on a link
-    document.querySelectorAll(".nav-links a").forEach((link) => {
-      link.addEventListener("click", () => {
-        mobileToggle.classList.remove("active");
-        navLinks.classList.remove("active");
-      });
-    });
-  }
-
-  // Theme toggle
-  const themeToggle = document.getElementById("themeToggle");
-  const html = document.documentElement;
-
-  // Check for saved theme preference or use system preference
-  const savedTheme =
-    localStorage.getItem("theme") ||
-    (window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light");
-  html.classList.add(savedTheme);
-  updateThemeIcon(savedTheme);
-
-  themeToggle.addEventListener("click", () => {
-    const currentTheme = html.classList.contains("dark") ? "dark" : "light";
-    const newTheme = currentTheme === "dark" ? "light" : "dark";
-
-    html.classList.remove(currentTheme);
-    html.classList.add(newTheme);
-    localStorage.setItem("theme", newTheme);
-    updateThemeIcon(newTheme);
-  });
-
-  function updateThemeIcon(theme) {
-    themeToggle.innerHTML =
-      theme === "dark"
-        ? '<i class="fas fa-sun"></i>'
-        : '<i class="fas fa-moon"></i>';
-  }
-
-  // Smooth scrolling for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
-      if (target) {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    });
-  });
-
-  // Header scroll behavior
-  let lastScroll = 0;
-  const header = document.querySelector("header");
-
-  window.addEventListener("scroll", () => {
-    const currentScroll = window.pageYOffset;
-
-    if (currentScroll <= 0) {
-      header.classList.remove("hidden");
-      return;
-    }
-
-    if (currentScroll > lastScroll && !header.classList.contains("hidden")) {
-      // Scroll down
-      header.classList.add("hidden");
-    } else if (
-      currentScroll < lastScroll &&
-      header.classList.contains("hidden")
-    ) {
-      // Scroll up
-      header.classList.remove("hidden");
-    }
-
-    lastScroll = currentScroll;
-  });
-
-  // Intersection Observer for animations
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-
-        // Special handling for timeline items
-        if (entry.target.classList.contains("timeline")) {
-          const timelineItems = document.querySelectorAll(".timeline-item");
-          timelineItems.forEach((item, index) => {
-            setTimeout(() => {
-              item.classList.add("visible");
-            }, index * 200);
-          });
-        }
-      }
-    });
-  }, observerOptions);
-
-  // Observe all fade-in-up elements
-  document.querySelectorAll(".fade-in-up").forEach((el) => {
-    observer.observe(el);
-  });
-
-  // Typing effect for hero subtitle
-  const subtitles = [
-    "Full Stack Developer",
-    "AI Enthusiast",
-    "Tech Leader",
-    "Problem Solver",
-  ];
-  let subtitleIndex = 0;
-
-  function typeWriter(element, text, speed = 100, callback) {
-    let i = 0;
-    element.innerHTML = "";
-    element.style.opacity = "1";
+    if (!typingElement) return;
 
     function type() {
-      if (i < text.length) {
-        element.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(type, speed);
-      } else if (callback) {
-        setTimeout(callback, 1500);
+      const fullText = subtitles[currentSubtitle];
+
+      if (isDeleting) {
+        typingElement.textContent = fullText.substring(0, currentChar - 1);
+        currentChar--;
+      } else {
+        typingElement.textContent = fullText.substring(0, currentChar + 1);
+        currentChar++;
       }
+
+      let typeSpeed = 100;
+
+      if (isDeleting) {
+        typeSpeed /= 2;
+      }
+
+      if (!isDeleting && currentChar === fullText.length) {
+        typeSpeed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && currentChar === 0) {
+        isDeleting = false;
+        currentSubtitle = (currentSubtitle + 1) % subtitles.length;
+        typeSpeed = 500;
+      }
+
+      setTimeout(type, typeSpeed);
     }
+
     type();
   }
 
-  function eraseText(element, speed = 50, callback) {
-    let text = element.innerHTML;
-    let length = text.length;
-
-    function erase() {
-      if (length > 0) {
-        element.innerHTML = text.substring(0, length - 1);
-        length--;
-        setTimeout(erase, speed);
-      } else if (callback) {
-        callback();
-      }
-    }
-    erase();
-  }
-
-  function cycleSubtitles() {
-    const subtitle = document.querySelector(".hero .subtitle");
-    if (subtitle) {
-      eraseText(subtitle, 50, () => {
-        subtitleIndex = (subtitleIndex + 1) % subtitles.length;
-        typeWriter(subtitle, subtitles[subtitleIndex], 100, cycleSubtitles);
+  // Initialize particles
+  function initParticles() {
+    if (typeof particlesJS !== "undefined") {
+      // Get current theme
+      const isDark = document.documentElement.classList.contains('dark');
+      const particleColor = isDark ? "#ffffff" : "#1e293b";
+      const lineColor = isDark ? "#ffffff" : "#1e293b";
+      
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: particleColor },
+          shape: { type: "circle" },
+          opacity: { value: isDark ? 0.5 : 0.3, random: false },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: lineColor,
+            opacity: isDark ? 0.4 : 0.2,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false
+          }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+            resize: true
+          }
+        },
+        retina_detect: true
       });
     }
   }
 
-  // Start typing effect after hero animation
-  setTimeout(() => {
-    const subtitle = document.querySelector(".hero .subtitle");
-    if (subtitle) {
-      typeWriter(subtitle, subtitles[0], 100, cycleSubtitles);
-    }
-  }, 1200);
+  // Mobile menu toggle
+  function initMobileMenu() {
+    const mobileToggle = document.getElementById("mobileMenuToggle");
+    const navLinks = document.querySelector(".nav-links");
+    const body = document.body;
 
-  // Add floating animation to profile image
-  const profileImg = document.querySelector(".profile-img");
-  if (profileImg) {
-    let floating = true;
-    setInterval(() => {
-      if (floating) {
-        profileImg.style.transform = "translateY(-10px)";
-      } else {
-        profileImg.style.transform = "translateY(0)";
-      }
-      floating = !floating;
-    }, 2000);
-  }
+    if (mobileToggle && navLinks) {
+      mobileToggle.addEventListener("click", function (e) {
+        e.stopPropagation();
+        this.classList.toggle("active");
+        navLinks.classList.toggle("active");
+        body.classList.toggle("mobile-menu-open");
+      });
 
-  // Project filtering
-  // const filterButtons = document.querySelectorAll(".filter-btn");
-  // const projectCards = document.querySelectorAll(".project-card");
+      // Close menu when clicking on a link
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileToggle.classList.remove("active");
+          navLinks.classList.remove("active");
+          body.classList.remove("mobile-menu-open");
+        });
+      });
 
-  // filterButtons.forEach((button) => {
-  //   button.addEventListener("click", () => {
-  //     // Update active button
-  //     filterButtons.forEach((btn) => btn.classList.remove("active"));
-  //     button.classList.add("active");
-
-  //     const filter = button.dataset.filter;
-
-  //     // Filter projects
-  //     projectCards.forEach((card) => {
-  //       if (filter === "all" || card.dataset.category.includes(filter)) {
-  //         card.style.display = "block";
-  //       } else {
-  //         card.style.display = "none";
-  //       }
-  //     });
-  //   });
-  // });
-
-  // // Project modals
-  // const modal = document.getElementById("projectModal");
-  // const modalClose = document.querySelector(".modal-close");
-  // const viewProjectButtons = document.querySelectorAll(".view-project");
-
-  // viewProjectButtons.forEach((button) => {
-  //   button.addEventListener("click", (e) => {
-  //     e.preventDefault();
-  //     const projectId = button.dataset.project;
-  //     const projectCard = button.closest(".project-card");
-
-  //     // Update modal content based on project
-  //     document.getElementById("modalTitle").textContent =
-  //       projectCard.querySelector(".project-title").textContent;
-  //     document.getElementById("modalDescription").innerHTML = `<p>${
-  //       projectCard.querySelector(".project-description").textContent
-  //     }</p>
-  //                        <p>Additional details about this project would go here, including challenges faced,
-  //                        solutions implemented, and results achieved.</p>`;
-
-  //     // Clone tech tags
-  //     const techTags = projectCard
-  //       .querySelector(".project-tech")
-  //       .cloneNode(true);
-  //     document.getElementById("modalTech").innerHTML = "";
-  //     document.getElementById("modalTech").appendChild(techTags);
-
-  //     // Set links
-  //     const links = projectCard.querySelectorAll(
-  //       ".project-link:not(.view-project)"
-  //     );
-  //     document.getElementById("modalLiveLink").href = links[0].href;
-  //     document.getElementById("modalGithubLink").href = links[1].href;
-
-  //     // Show modal
-  //     modal.classList.add("active");
-  //     document.body.style.overflow = "hidden";
-  //   });
-  // });
-
-  // modalClose.addEventListener("click", () => {
-  //   modal.classList.remove("active");
-  //   document.body.style.overflow = "auto";
-  // });
-
-  // window.addEventListener("click", (e) => {
-  //   if (e.target === modal) {
-  //     modal.classList.remove("active");
-  //     document.body.style.overflow = "auto";
-  //   }
-  // });
-
-  // Project Modals - Dynamic Content
-  document.querySelectorAll(".view-project").forEach((button) => {
-    button.addEventListener("click", (e) => {
-      e.preventDefault();
-      const projectCard = button.closest(".project-card");
-      const projectId = button.dataset.project;
-
-      // Get project data
-      const title = projectCard.querySelector(".project-title").textContent;
-      const subtitle =
-        projectCard.querySelector(".project-subtitle").textContent;
-      const description = projectCard.querySelector(
-        ".project-description"
-      ).textContent;
-      const techTags = projectCard.querySelector(".project-tech").innerHTML;
-      const links = Array.from(
-        projectCard.querySelectorAll(".project-link:not(.view-project)")
-      ).map((link) => link.outerHTML);
-
-      // Custom content for each project (add your project-specific data here)
-      const projectData = {
-        1: {
-          // AI ChatBot
-          images: [
-            "assets/images/aichatbot.png",
-            "assets/images/aichatbot-2.png",
-          ],
-          features: `
-          <h4><i class="fas fa-bolt"></i> Key Features</h4>
-          <ul>
-            <li>Document processing with LLMs (Mistral, Phi-2)</li>
-            <li>FAISS vector search for context-aware responses</li>
-            <li>90%+ accuracy in Q&A testing</li>
-          </ul>
-        `,
-          challenges: `
-          <h4><i class="fas fa-exclamation-triangle"></i> Challenges Solved</h4>
-          <ul>
-            <li>Reduced query latency by 30% with custom caching</li>
-            <li>Optimized for limited hardware (GTX 1650)</li>
-          </ul>
-        `,
-          liveDemo: "https://aichatbot-demo.example.com",
-          github: "https://github.com/utkarshrajputt/rag-chatbot",
-        },
-        2: {
-          // ShopEase
-          images: [
-            "assets/images/shopease-1.png",
-            "assets/images/shopease-2.png",
-          ],
-          features: `
-          <h4><i class="fas fa-shopping-cart"></i> E-commerce Features</h4>
-          <ul>
-            <li>Buyer/Seller dashboards</li>
-            <li>AI chatbot for real-time support</li>
-            <li>Payment gateway integration</li>
-          </ul>
-        `,
-          liveDemo: "https://shopeasestore.pythonanywhere.com/",
-          github: "https://github.com/utkarshrajputt/shopease",
-        },
-        3: {
-          images: ["assets/images/neev-1.png", "assets/images/neev-2.png"],
-          features: `
-    <h4><i class="fas fa-users"></i> User Benefits</h4>
-    <ul>
-      <li>900+ student users</li>
-      <li>Attendance tracking</li>
-      <li>PDF/Excel report generation</li>
-    </ul>
-  `,
-          challenges: `
-    <h4><i class="fas fa-lightbulb"></i> Solutions Implemented</h4>
-    <ul>
-      <li>60% faster data retrieval with optimized queries</li>
-      <li>Role-based access control</li>
-    </ul>
-  `,
-          liveDemo: "http://202.129.240.162:8081/student/student_login.php",
-          github: "https://github.com/utkarshrajputt/semcom_portal",
-        },
-        4: {
-          // BlogSite
-          images: [
-            "assets/images/blogsite-1.png",
-            "assets/images/blogsite-2.png",
-          ],
-          features: `
-    <h4><i class="fas fa-blog"></i> Blogging Platform Features</h4>
-    <ul>
-      <li>Rich-text post creation and editing</li>
-      <li>User & author dashboards</li>
-      <li>Commenting, likes, and engagement analytics</li>
-    </ul>
-  `,
-          challenges: `
-    <h4><i class="fas fa-tools"></i> Challenges Solved</h4>
-    <ul>
-      <li>Implemented comment threading and moderation</li>
-      <li>Responsive layout with custom pagination logic</li>
-    </ul>
-  `,
-          liveDemo: "http://www.blogo-ut.infinityfreeapp.com/home.php?i=2",
-          github: "https://github.com/utkarshrajputt/Blogo",
-        },
-
-        5: {
-          // LeetCode Streak Bot
-          images: [
-            "assets/images/leetcode1.png",
-            "assets/images/leetcode2.png",
-          ],
-          features: `
-    <h4><i class="fas fa-robot"></i> Automation Highlights</h4>
-    <ul>
-      <li>Daily LeetCode streak check via GitHub Actions</li>
-      <li>Telegram integration for daily motivation or roast 😂</li>
-      <li>Uses GraphQL API to fetch submission history</li>
-    </ul>
-  `,
-          challenges: `
-    <h4><i class="fas fa-cogs"></i> Engineering Challenges</h4>
-    <ul>
-      <li>Auth and API limitations bypassed using GitHub Secrets</li>
-      <li>Timezone-adjusted cron job to match Indian users</li>
-    </ul>
-  `,
-          liveDemo: "https://t.me/utkarsh_streak_bot",
-          github: "https://github.com/utkarshrajputt/leetcode-streak-checker",
-        },
-
-        // Add other projects (3, 4, etc.) following the same pattern
-      };
-
-      // Populate Modal
-      const modal = document.getElementById("dynamicModal");
-      modal.querySelector("#modalTitle").textContent = title;
-
-      // Images Section
-      const imagesContainer = modal.querySelector("#modalImages");
-      imagesContainer.innerHTML = projectData[projectId].images
-        .map(
-          (img) => `
-      <div class="modal-image">
-        <img src="${img}" alt="${title} Screenshot">
-      </div>
-    `
-        )
-        .join("");
-
-      // Description Section
-      modal.querySelector("#modalDescription").innerHTML = `
-      <p class="project-subtitle">${subtitle}</p>
-      <p>${description}</p>
-      ${projectData[projectId].features || ""}
-      ${projectData[projectId].challenges || ""}
-    `;
-
-      // Tech Tags
-      modal.querySelector("#modalTech").innerHTML = techTags;
-
-      // Links
-      const liveDemo = projectData[projectId].liveDemo;
-      const github = projectData[projectId].github;
-      modal.querySelector("#modalLinks").innerHTML = `
-        ${
-          liveDemo
-            ? `<a href="${liveDemo}" class="btn btn-primary" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>`
-            : ""
+      // Close menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!mobileToggle.contains(e.target) && !navLinks.contains(e.target)) {
+          mobileToggle.classList.remove("active");
+          navLinks.classList.remove("active");
+          body.classList.remove("mobile-menu-open");
         }
-        ${
-          github
-            ? `<a href="${github}" class="btn btn-secondary" target="_blank"><i class="fab fa-github"></i> GitHub</a>`
-            : ""
-        }
-      `;
-
-      // Show Modal
-      modal.classList.add("active");
-      document.body.style.overflow = "hidden";
-    });
-  });
-
-  // Close Modal
-  document.querySelectorAll(".modal-close").forEach((button) => {
-    button.addEventListener("click", () => {
-      document.querySelector(".modal.active").classList.remove("active");
-      document.body.style.overflow = "auto";
-    });
-  });
-
-  // Close when clicking outside
-  window.addEventListener("click", (e) => {
-    if (e.target.classList.contains("modal")) {
-      e.target.classList.remove("active");
-      document.body.style.overflow = "auto";
+      });
     }
-  });
-
-  // Chatbot functionality
-  const chatbotToggle = document.getElementById("chatbotToggle");
-  const chatbotContainer = document.getElementById("chatbotContainer");
-  const chatbotClose = document.getElementById("chatbotClose");
-  const chatbotMessages = document.getElementById("chatbotMessages");
-  const chatbotInput = document.getElementById("chatbotInput");
-  const chatbotSend = document.getElementById("chatbotSend");
-
-  chatbotToggle.addEventListener("click", () => {
-    chatbotContainer.classList.toggle("active");
-  });
-
-  chatbotClose.addEventListener("click", () => {
-    chatbotContainer.classList.remove("active");
-  });
-
-  function addBotMessage(text) {
-    const messageDiv = document.createElement("div");
-    messageDiv.className = "message bot-message";
-    messageDiv.textContent = text;
-    chatbotMessages.appendChild(messageDiv);
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
   }
 
-  function addUserMessage(text) {
-    const messageDiv = document.createElement("div");
-    messageDiv.className = "message user-message";
-    messageDiv.textContent = text;
-    chatbotMessages.appendChild(messageDiv);
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-  }
+  // Theme toggle
+  function initThemeToggle() {
+    const themeToggle = document.getElementById("themeToggle");
+    const html = document.documentElement;
 
-  function handleUserInput() {
-    const userMessage = chatbotInput.value.trim();
-    if (userMessage) {
-      addUserMessage(userMessage);
-      chatbotInput.value = "";
-      showTyping();
+    if (!themeToggle) return;
+
+    // Check for saved theme preference or use system preference
+    const savedTheme =
+      localStorage.getItem("theme") ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light");
+    
+    html.classList.add(savedTheme);
+    console.log("Theme initialized:", savedTheme);
+
+    themeToggle.addEventListener("click", () => {
+      const currentTheme = html.classList.contains("dark") ? "dark" : "light";
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      html.classList.remove(currentTheme);
+      html.classList.add(newTheme);
+      localStorage.setItem("theme", newTheme);
+      console.log("Theme changed to:", newTheme);
+      
+      // Reinitialize particles with new theme
       setTimeout(() => {
-        hideTyping();
-        const msg = userMessage.toLowerCase();
-
-        // Greetings
-        if (msg.includes("hello") || msg.includes("hi")) {
-          addBotMessage("Hello! How can I help you today?");
-        }
-        // Project-related queries
-        else if (msg.includes("project") || msg.includes("work")) {
-          addBotMessage(
-            `You can view my projects in the Projects section. Here are a few highlights:\n• AI ChatBot An intelligent document-processing chatbot using LLMs and vector search.\n• ShopEase A full-stack e-commerce platform with an AI-based support chatbot.\n• NEEV Portal A student profiling and management system.\nLet me know if you want details about a specific project!`
-          );
-        }
-        // Specific project names
-        else if (msg.includes("ai chatbot")) {
-          addBotMessage(
-            "The AI ChatBot project processes uploaded files and answers questions using advanced AI models. It achieved over 90% accuracy in internal tests. Want to know more?"
-          );
-        } else if (msg.includes("shopease")) {
-          addBotMessage(
-            "ShopEase is a robust e-commerce platform with real-time AI chatbot support for users. It connects buyers and sellers seamlessly. Interested in its tech stack?"
-          );
-        } else if (msg.includes("neev")) {
-          addBotMessage(
-            "The NEEV Portal is a student profiling system designed to streamline academic and extracurricular tracking. Would you like more details?"
-          );
-        }
-        // Contact
-        else if (msg.includes("contact") || msg.includes("email")) {
-          addBotMessage(
-            "You can reach me via email at utkarshrajput1583@gmail.com or through the contact form in the Contact section."
-          );
-        }
-        // Experience
-        else if (msg.includes("experience") || msg.includes("work history")) {
-          addBotMessage(
-            "I have experience as a Trainee Data Science Engineer at KodeZera and as a Backend Developer Intern at SEMCOM. Check the Experience section for more!"
-          );
-        }
-        // Skills
-        else if (msg.includes("skills") || msg.includes("tech stack")) {
-          addBotMessage(
-            "My core skills include Python, Django, JavaScript, AI/ML, and full-stack web development. I also work with LLMs, vector search, and modern frontend frameworks."
-          );
-        }
-        // Resume
-        else if (msg.includes("resume") || msg.includes("cv")) {
-          addBotMessage(
-            "You can download my latest resume from the Resume section."
-          );
-        }
-        // Blog
-        else if (msg.includes("blog") || msg.includes("article")) {
-          addBotMessage(
-            "Check out my Blog section for articles on Django performance, balancing academics and projects, and more tech topics!"
-          );
-        }
-        // Location
-        else if (msg.includes("location") || msg.includes("where are you")) {
-          addBotMessage(
-            "I'm based in Pune, India. Always open to remote and hybrid opportunities!"
-          );
-        }
-        // Subtle error/fallback
-        else {
-          addBotMessage(
-            "I'm still learning! If I couldn't answer your question, please try rephrasing or reach out via email for more details."
-          );
-        }
-      }, 900);
-    }
-  }
-
-  function showTyping() {
-  const typingDiv = document.createElement("div");
-  typingDiv.className = "message bot-typing";
-  typingDiv.textContent = "Typing...";
-  typingDiv.id = "typing-indicator";
-  chatbotMessages.appendChild(typingDiv);
-  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-}
-
-function hideTyping() {
-  const typingDiv = document.getElementById("typing-indicator");
-  if (typingDiv) typingDiv.remove();
-}
-
-
-  chatbotSend.addEventListener("click", handleUserInput);
-  chatbotInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      handleUserInput();
-    }
-  });
-
-  // Initialize particles.js
-  if (typeof particlesJS !== "undefined") {
-    particlesJS("particles-js", {
-      particles: {
-        number: {
-          value: 80,
-          density: {
-            enable: true,
-            value_area: 800,
-          },
-        },
-        color: {
-          value: "#ffffff",
-        },
-        shape: {
-          type: "circle",
-          stroke: {
-            width: 0,
-            color: "#000000",
-          },
-          polygon: {
-            nb_sides: 5,
-          },
-        },
-        opacity: {
-          value: 0.5,
-          random: false,
-          anim: {
-            enable: false,
-            speed: 1,
-            opacity_min: 0.1,
-            sync: false,
-          },
-        },
-        size: {
-          value: 3,
-          random: true,
-          anim: {
-            enable: false,
-            speed: 40,
-            size_min: 0.1,
-            sync: false,
-          },
-        },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#ffffff",
-          opacity: 0.4,
-          width: 1,
-        },
-        move: {
-          enable: true,
-          speed: 2,
-          direction: "none",
-          random: false,
-          straight: false,
-          out_mode: "out",
-          bounce: false,
-          attract: {
-            enable: false,
-            rotateX: 600,
-            rotateY: 1200,
-          },
-        },
-      },
-      interactivity: {
-        detect_on: "canvas",
-        events: {
-          onhover: {
-            enable: true,
-            mode: "grab",
-          },
-          onclick: {
-            enable: true,
-            mode: "push",
-          },
-          resize: true,
-        },
-        modes: {
-          grab: {
-            distance: 140,
-            line_linked: {
-              opacity: 1,
-            },
-          },
-          bubble: {
-            distance: 400,
-            size: 40,
-            duration: 2,
-            opacity: 8,
-            speed: 3,
-          },
-          repulse: {
-            distance: 200,
-            duration: 0.4,
-          },
-          push: {
-            particles_nb: 4,
-          },
-          remove: {
-            particles_nb: 2,
-          },
-        },
-      },
-      retina_detect: true,
+        initParticles();
+      }, 100);
     });
   }
 
-  // Enhanced Stats Animation
-  function animateStats() {
-    const statCards = document.querySelectorAll(".stat-card");
-
-    statCards.forEach((card) => {
-      const target = parseFloat(card.getAttribute("data-value"));
-      const suffix = card.getAttribute("data-suffix") || "";
-      const statNumber = card.querySelector(".stat-number");
-      const duration = 2000;
-      const start = 0;
-
-      let current = start;
-      const increment = target / (duration / 16);
-
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          clearInterval(timer);
-          current = target;
+  // Smooth scrolling for navigation links
+  function initSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
         }
-
-        // Handle decimal values
-        const displayValue = Number.isInteger(target)
-          ? Math.floor(current)
-          : current.toFixed(1);
-
-        statNumber.textContent = displayValue + suffix;
-      }, 16);
+      });
     });
   }
 
-  // Intersection Observer for animation trigger
-  const aboutObserver = new IntersectionObserver(
-    (entries) => {
+  // Scroll animations
+  function initScrollAnimations() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    };
+
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          animateStats();
-          aboutObserver.unobserve(entry.target);
+          entry.target.classList.add("visible");
         }
       });
-    },
-    { threshold: 0.2 }
-  );
+    }, observerOptions);
 
-  aboutObserver.observe(document.querySelector("#about"));
+    // Observe all animatable elements
+    document.querySelectorAll(".fade-in-up").forEach((el) => {
+      observer.observe(el);
+    });
+  }
 
-  // Add dynamic greeting based on time
-  function updateGreeting() {
-    const hour = new Date().getHours();
-    let greeting = "";
+  // Active navigation highlight
+  function initActiveNavigation() {
+    const navLinks = document.querySelectorAll(".nav-link");
+    const sections = document.querySelectorAll("section[id]");
 
-    if (hour < 12) greeting = "Good morning! ☀️";
-    else if (hour < 17) greeting = "Good afternoon! 🌤️";
-    else greeting = "Good evening! 🌙";
+    function updateActiveNav() {
+      const scrollY = window.pageYOffset;
 
-    const heroDescription = document.querySelector(".hero .description");
-    if (heroDescription) {
-      heroDescription.innerHTML = greeting + " " + heroDescription.innerHTML;
+      sections.forEach((section) => {
+        const sectionHeight = section.offsetHeight;
+        const sectionTop = section.offsetTop - 100;
+        const sectionId = section.getAttribute("id");
+
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+          navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === `#${sectionId}`) {
+              link.classList.add("active");
+            }
+          });
+        }
+      });
+    }
+
+    window.addEventListener("scroll", updateActiveNav);
+  }
+
+  // Project modal functionality
+  function initProjectModal() {
+    const projectData = {
+      1: {
+        title: "AI ChatBot",
+        description: "Advanced AI chatbot that processes uploaded files and returns intelligent responses using state-of-the-art NLP techniques.",
+        technologies: ["Python", "Flask", "NLP", "Machine Learning", "AI"],
+        images: ["assets/images/aichatbot.png","assets/images/aichatbot.png"],
+        features: [
+          "File upload and processing capabilities",
+          "Natural language understanding",
+          "Context-aware responses",
+          "Multi-format document support",
+          "Real-time chat interface"
+        ],
+        liveDemo: "https://ai-chatbot-demo.example.com",
+        github: "https://github.com/utkarshrajputt/rag-chatbot"
+      },
+      2: {
+        title: "Smart Marketplace",
+        description: "A comprehensive e-commerce platform that facilitates secure transactions between buyers and sellers with AI-powered features.",
+        technologies: ["Django", "Python", "PostgreSQL", "AI Chatbot", "REST API"],
+        images: [],
+        features: [
+          "User authentication and authorization",
+          "Product catalog with search functionality",
+          "AI-powered recommendation system",
+          "Secure payment integration",
+          "Real-time messaging system"
+        ],
+        liveDemo: "https://shopeasestore.pythonanywhere.com/",
+        github: "https://github.com/utkarshrajputt/shopease"
+      },
+      3: {
+        title: "NEEV Portal",
+        description: "Comprehensive student profiling software designed for SEMCOM College, now used by 900+ students for academic data and communication.",
+        technologies: ["PHP", "PDO", "MySQL", "Responsive Design"],
+        images: [],
+        features: [
+          "Role-based dashboards for students and faculty",
+          "PDF/Excel report generation",
+          "Attendance upload and tracking",
+          "Secure student login system",
+          "Resource management workflows"
+        ],
+        liveDemo: "http://202.129.240.162:8081/student/student_login.php",
+        github: "https://github.com/utkarshrajputt/semcom_portal"
+      },
+      4: {
+        title: "BLogSite",
+        description: "Responsive blogging platform with comprehensive user and author panels featuring post creation, likes, comments, and detailed engagement tracking.",
+        technologies: ["PHP", "PDO", "JavaScript", "CSS3"],
+        images: [],
+        features: [
+          "User and author management panels",
+          "Post creation and editing tools",
+          "Like and comment system",
+          "User engagement analytics",
+          "Responsive design for all devices"
+        ],
+        liveDemo: "https://blogo-ut.infinityfreeapp.com/home.php",
+        github: "https://github.com/utkarshrajputt/blogo"
+      },
+      5: {
+        title: "LeetCode Streak Bot",
+        description: "A daily reminder bot that checks your LeetCode activity and sends motivational praise or hilarious roasts via Telegram based on your coding consistency.",
+        technologies: ["Python", "GitHub Actions", "GraphQL", "Telegram API", "AI Motivation"],
+        images: [],
+        features: [
+          "Automated daily LeetCode activity checking",
+          "AI-generated motivational messages",
+          "Telegram bot integration",
+          "GitHub Actions automation",
+          "Streak tracking and analytics"
+        ],
+        liveDemo: "https://t.me/utkarsh_streak_bot",
+        github: "https://github.com/utkarshrajputt/leetcode-streak-checker"
+      }
+    };
+
+    // Modal elements
+    const modal = document.getElementById("projectModal");
+    const closeBtn = document.querySelector(".close");
+    const viewProjectBtns = document.querySelectorAll(".view-project");
+
+    if (!modal || !closeBtn) return;
+
+    // Add click listeners to view project buttons
+    viewProjectBtns.forEach((btn) => {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        const projectId = this.getAttribute("data-project");
+        if (projectId && projectData[projectId]) {
+          showProjectModal(projectData[projectId]);
+        }
+      });
+    });
+
+    // Show modal with project data
+    function showProjectModal(project) {
+      // Update modal content
+      document.getElementById("modalTitle").textContent = project.title;
+      document.getElementById("modalDescription").innerHTML = `<p>${project.description}</p>`;
+
+      // Update images
+      const imagesContainer = document.getElementById("modalImages");
+      if (imagesContainer) {
+        if (project.images && project.images.length > 0) {
+          imagesContainer.classList.add('has-images');
+          imagesContainer.innerHTML = project.images
+            .map((img) => `
+              <div class="modal-image">
+                <img src="${img}" alt="${project.title} screenshot" loading="lazy">
+              </div>
+            `)
+            .join("");
+        } else {
+          imagesContainer.classList.remove('has-images');
+          imagesContainer.innerHTML = "";
+        }
+      }
+
+      // Update technologies
+      const techContainer = document.getElementById("modalTechnologies");
+      if (techContainer) {
+        techContainer.innerHTML = project.technologies
+          .map((tech) => `<span class="tech-tag">${tech}</span>`)
+          .join("");
+      }
+
+      // Update features
+      const featuresContainer = document.getElementById("modalFeatures");
+      if (featuresContainer) {
+        featuresContainer.innerHTML = `
+          <h4>Key Features</h4>
+          <ul>
+            ${project.features.map((feature) => `<li>${feature}</li>`).join("")}
+          </ul>
+        `;
+      }
+
+      // Update buttons - Show project links section
+      const modalLinks = document.getElementById("modalLinks");
+      const liveDemoBtn = document.getElementById("liveDemoBtn");
+      const githubBtn = document.getElementById("githubBtn");
+      
+      if (modalLinks) {
+        modalLinks.style.display = "flex";
+      }
+      
+      if (liveDemoBtn && project.liveDemo) {
+        liveDemoBtn.href = project.liveDemo;
+        liveDemoBtn.style.display = "inline-flex";
+        // Ensure new tab opening
+        liveDemoBtn.removeAttribute('onclick');
+        liveDemoBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.open(this.href, '_blank', 'noopener,noreferrer');
+        });
+      } else if (liveDemoBtn) {
+        liveDemoBtn.style.display = "none";
+      }
+      
+      if (githubBtn && project.github) {
+        githubBtn.href = project.github;
+        githubBtn.style.display = "inline-flex";
+        // Ensure new tab opening
+        githubBtn.removeAttribute('onclick');
+        githubBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.open(this.href, '_blank', 'noopener,noreferrer');
+        });
+      } else if (githubBtn) {
+        githubBtn.style.display = "none";
+      }
+
+      // Show modal
+      modal.classList.add('active');
+      document.body.style.overflow = "hidden";
+      
+      // Focus management for accessibility
+      modal.focus();
+    }
+
+    // Close modal functionality
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = "auto";
+    }
+
+    closeBtn.addEventListener("click", closeModal);
+
+    // Close modal when clicking outside
+    window.addEventListener("click", function (event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && modal.style.display === "block") {
+        closeModal();
+      }
+    });
+  }
+
+  // Project filtering functionality
+  function initProjectFiltering() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    if (!filterButtons.length || !projectCards.length) return;
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        button.classList.add('active');
+
+        const filter = button.getAttribute('data-filter');
+
+        projectCards.forEach(card => {
+          if (filter === 'all') {
+            card.style.display = 'block';
+            card.style.animation = 'fadeIn 0.5s ease-in-out';
+          } else {
+            const categories = card.getAttribute('data-category');
+            if (categories && categories.includes(filter)) {
+              card.style.display = 'block';
+              card.style.animation = 'fadeIn 0.5s ease-in-out';
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+  }
+
+  // Add fadeIn animation for project filtering
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Enhanced Chatbot functionality with subtle responses and exception handling
+  function initChatbot() {
+    try {
+      const chatbotToggle = document.getElementById("chatbotToggle");
+      const chatbotContainer = document.getElementById("chatbotContainer");
+      const chatbotClose = document.getElementById("chatbotClose");
+      const chatbotInput = document.getElementById("chatbotInput");
+      const chatbotSend = document.getElementById("chatbotSend");
+      const chatbotMessages = document.getElementById("chatbotMessages");
+      const typingIndicator = document.getElementById("typingIndicator");
+
+      if (!chatbotToggle || !chatbotContainer || !chatbotClose || !chatbotInput || !chatbotSend || !chatbotMessages) {
+        console.warn("Chatbot elements not found, skipping initialization");
+        return;
+      }
+
+      // Enhanced chatbot responses with more natural, subtle language
+      const responses = {
+        greetings: [
+          "Hello! I'm here to help you learn more about Utkarsh. What would you like to know? 😊",
+          "Hi there! Feel free to ask me anything about Utkarsh's background, projects, or expertise.",
+          "Hey! I'm Utkarsh's AI assistant. I'd be happy to share insights about his work and experience.",
+          "Welcome! I can tell you about Utkarsh's skills, projects, academic journey, or anything else you're curious about."
+        ],
+        skills: [
+          "Utkarsh has a strong foundation in Python, Django, and AI/ML technologies. He's particularly passionate about building intelligent solutions and currently maintains a 9.3 GPA in his MCA program.",
+          "His technical expertise spans full-stack development, machine learning, and AI implementation. He's especially skilled with Python frameworks and modern web technologies.",
+          "Utkarsh specializes in Python development, AI/ML systems, and web technologies. His academic excellence (9.3 GPA) reflects his deep understanding of computer applications.",
+          "He's proficient in Python, Django, JavaScript, AI/ML, and database management. His projects showcase a perfect blend of theoretical knowledge and practical implementation."
+        ],
+        projects: [
+          "Utkarsh has created some fascinating projects! His AI ChatBot processes documents intelligently, and his e-commerce platform features real-time AI assistance. Both demonstrate his ability to solve real-world problems.",
+          "His portfolio includes an advanced AI chatbot with document processing capabilities and a comprehensive marketplace platform. These projects highlight his skills in both AI and full-stack development.",
+          "Notable projects include an intelligent document-processing chatbot and a feature-rich e-commerce platform. Each project shows his commitment to creating user-friendly, technologically advanced solutions.",
+          "He's built several impressive projects, including AI-powered applications and web platforms that serve hundreds of users. His work often combines cutting-edge AI with practical business solutions."
+        ],
+        experience: [
+          "Utkarsh brings experience from internships at KodeZera and SEMCOM College, where he's worked on production-grade AI systems and platforms serving 900+ users. He's also active in academic leadership roles.",
+          "His professional journey includes developing AI chatbots with LLMs, building scalable web applications, and leading student initiatives. He's currently pursuing his MCA while gaining hands-on industry experience.",
+          "He has experience in AI development, full-stack programming, and project leadership. His work ranges from optimizing query performance to developing user-friendly interfaces for large-scale applications.",
+          "Utkarsh combines academic excellence with practical experience in AI/ML development and web technologies. He's worked on projects that impact hundreds of users while maintaining top academic performance."
+        ],
+        education: [
+          "Utkarsh is currently pursuing his Master of Computer Applications (MCA) at PCCoE, Pune University, where he maintains an impressive 9.3 GPA while working on cutting-edge projects.",
+          "He's studying MCA at PCCoE under Pune University with exceptional academic performance (9.3 GPA). His curriculum focuses on advanced computing concepts and practical application development.",
+          "Currently in his MCA program at PCCoE, Pune University, Utkarsh excels academically (9.3 GPA) while actively participating in research and development projects.",
+          "His academic journey at PCCoE, Pune University has been marked by consistent excellence, maintaining a 9.3 GPA while engaging in both theoretical studies and practical project work."
+        ],
+        contact: [
+          "You can reach out to Utkarsh through the contact form on this website, or connect with him on LinkedIn and GitHub. He's always open to discussing new opportunities and collaborations!",
+          "Feel free to use the contact section below, or find him on his professional social profiles. Utkarsh enjoys connecting with fellow developers and potential collaborators.",
+          "Utkarsh is available through multiple channels - the contact form here, LinkedIn for professional networking, or GitHub to see his latest code. He welcomes meaningful conversations!",
+          "You can connect with Utkarsh via the contact form, LinkedIn for professional discussions, or GitHub to explore his repositories. He's always interested in new projects and opportunities."
+        ],
+        achievements: [
+          "Beyond his 9.3 GPA, Utkarsh serves as PMA President and is actively involved in placement preparation initiatives that have benefited 70+ students. His leadership extends beyond just technical skills.",
+          "His achievements include academic excellence, successful project deployments serving hundreds of users, and leadership roles in student organizations. He's also contributed to improving placement outcomes at his college.",
+          "Utkarsh has demonstrated excellence in academics, project development, and student leadership. His work has positively impacted hundreds of users and fellow students through various initiatives.",
+          "He's achieved recognition for both technical projects and leadership contributions, including platforms used by 900+ students and successful bootcamp programs for peers."
+        ],
+        technologies: [
+          "Utkarsh works with a modern tech stack including Python, Django, React, AI/ML libraries, and cloud technologies. He's always exploring new tools to build better solutions.",
+          "His technology arsenal includes Python frameworks, JavaScript libraries, AI/ML tools like TensorFlow, and database systems. He chooses technologies based on project requirements and scalability needs.",
+          "He's experienced with Python, Django, React, AI/ML frameworks, MySQL, and various development tools. His approach focuses on selecting the right technology for each specific challenge.",
+          "Utkarsh utilizes a diverse range of technologies - from Python and Django for backend development to AI/ML libraries for intelligent features, always prioritizing user experience and performance."
+        ],
+        motivation: [
+          "What drives Utkarsh is the intersection of technology and real-world impact. He believes in creating solutions that not only showcase technical prowess but genuinely help people and businesses.",
+          "He's motivated by the challenge of solving complex problems through elegant, efficient code. Utkarsh sees programming as a tool for positive change and innovation.",
+          "Utkarsh is passionate about bridging the gap between cutting-edge technology and practical applications. He finds fulfillment in projects that combine technical excellence with meaningful impact.",
+          "His motivation comes from the endless possibilities in technology to solve real problems. Whether it's AI, web development, or leadership, Utkarsh approaches each challenge with curiosity and determination."
+        ],
+        default: [
+          "That's an interesting question! While I might not have specific details on that topic, I'd encourage you to reach out to Utkarsh directly through the contact form - he loves engaging conversations.",
+          "I appreciate your curiosity! For more detailed information about that, connecting with Utkarsh directly would be your best bet. He's quite responsive and enjoys discussing various topics.",
+          "That's a thoughtful question! While I focus on sharing information about Utkarsh's professional background, he'd be the best person to give you insights on that particular topic.",
+          "Great question! I'd recommend reaching out to Utkarsh directly for the most comprehensive answer. He's always happy to share his perspectives and experiences.",
+          "I understand your interest in that topic! For the most accurate and detailed response, connecting with Utkarsh through his contact information would be ideal."
+        ],
+        errors: [
+          "I apologize, but I seem to have encountered a small hiccup. Could you please try rephrasing your question?",
+          "Something didn't quite work as expected on my end. Would you mind asking that again, perhaps in a different way?",
+          "I'm having a brief moment of confusion. Could you help me by asking your question in a slightly different manner?",
+          "My apologies - I seem to have missed that. Could you please try your question once more?"
+        ]
+      };
+
+      let isOpen = false;
+      let isTyping = false;
+      let messageHistory = [];
+
+      // Utility functions
+      function getCurrentTime() {
+        return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      }
+
+      function sanitizeInput(input) {
+        if (typeof input !== 'string') {
+          return String(input);
+        }
+        
+        // Only sanitize potentially dangerous HTML/script content
+        // Remove script tags and dangerous attributes
+        let sanitized = input
+          .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+          .replace(/javascript:/gi, '')
+          .replace(/on\w+\s*=/gi, '');
+        
+        // Only escape < and > to prevent HTML injection, but keep quotes and apostrophes readable
+        sanitized = sanitized
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+        
+        return sanitized.trim();
+      }
+
+      function sanitizeUserInput(input) {
+        if (typeof input !== 'string') {
+          return String(input);
+        }
+        
+        // More strict sanitization for user input
+        let sanitized = input
+          .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+          .replace(/javascript:/gi, '')
+          .replace(/on\w+\s*=/gi, '');
+        
+        // Escape HTML characters for user input
+        const escapeMap = {
+          '<': '&lt;',
+          '>': '&gt;',
+          '&': '&amp;',
+          '"': '&quot;',
+          "'": '&#x27;'
+        };
+        
+        sanitized = sanitized.replace(/[<>&"']/g, function(match) {
+          return escapeMap[match] || match;
+        });
+        
+        return sanitized.trim();
+      }
+
+      function getRandomResponse(responseArray) {
+        if (!Array.isArray(responseArray) || responseArray.length === 0) {
+          return "I'm having trouble processing that right now. Could you try asking in a different way?";
+        }
+        return responseArray[Math.floor(Math.random() * responseArray.length)];
+      }
+
+      // Enhanced message analysis with better pattern matching
+      function analyzeMessage(message) {
+        try {
+          const lowerMessage = message.toLowerCase().trim();
+          const keywords = {
+            greetings: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening', 'start'],
+            skills: ['skill', 'technology', 'tech', 'programming', 'language', 'framework', 'development', 'coding', 'software'],
+            projects: ['project', 'work', 'portfolio', 'build', 'develop', 'application', 'website', 'system'],
+            experience: ['experience', 'background', 'career', 'job', 'internship', 'professional', 'workplace'],
+            education: ['education', 'study', 'college', 'university', 'degree', 'academic', 'student', 'learning'],
+            achievements: ['achievement', 'award', 'recognition', 'accomplishment', 'success', 'leadership', 'president'],
+            technologies: ['python', 'django', 'javascript', 'react', 'ai', 'ml', 'machine learning', 'database', 'mysql'],
+            motivation: ['motivation', 'inspire', 'passion', 'drive', 'goal', 'vision', 'future', 'ambition'],
+            contact: ['contact', 'reach', 'connect', 'email', 'phone', 'social', 'linkedin', 'github']
+          };
+
+          // Find the best matching category
+          let bestMatch = 'default';
+          let maxMatches = 0;
+
+          for (const [category, words] of Object.entries(keywords)) {
+            const matches = words.filter(word => lowerMessage.includes(word)).length;
+            if (matches > maxMatches) {
+              maxMatches = matches;
+              bestMatch = category;
+            }
+          }
+
+          // Special cases for specific queries
+          if (lowerMessage.includes('gpa') || lowerMessage.includes('grade') || lowerMessage.includes('score')) {
+            return getRandomResponse(responses.education);
+          }
+
+          if (lowerMessage.includes('help') || lowerMessage.includes('assist') || lowerMessage.includes('support')) {
+            return "I'm here to help! You can ask me about Utkarsh's skills, projects, education, experience, or achievements. What interests you most?";
+          }
+
+          return getRandomResponse(responses[bestMatch]);
+        } catch (error) {
+          console.warn("Error analyzing message:", error);
+          return getRandomResponse(responses.errors);
+        }
+      }
+
+      // Enhanced message display with better UX
+      function addMessage(text, sender, showTime = true) {
+        try {
+          if (!text || typeof text !== 'string') {
+            console.warn("Invalid message text provided");
+            return;
+          }
+
+          const messageDiv = document.createElement("div");
+          messageDiv.className = `message ${sender}-message`;
+          
+          const contentDiv = document.createElement("div");
+          contentDiv.className = "message-content";
+          
+          // Use different sanitization based on sender
+          let sanitizedText;
+          if (sender === 'user') {
+            // More strict sanitization for user input
+            sanitizedText = sanitizeUserInput(text);
+          } else {
+            // Lighter sanitization for bot messages (preserve readability)
+            sanitizedText = text; // Bot messages are controlled, no need for heavy sanitization
+          }
+          
+          contentDiv.textContent = sanitizedText;
+          messageDiv.appendChild(contentDiv);
+          
+          if (showTime) {
+            const timeDiv = document.createElement("div");
+            timeDiv.className = "message-time";
+            timeDiv.textContent = getCurrentTime();
+            messageDiv.appendChild(timeDiv);
+          }
+          
+          // Insert before typing indicator if it exists
+          if (typingIndicator && typingIndicator.parentNode === chatbotMessages) {
+            chatbotMessages.insertBefore(messageDiv, typingIndicator);
+          } else {
+            chatbotMessages.appendChild(messageDiv);
+          }
+          
+          // Store in message history
+          messageHistory.push({ 
+            text: sanitizedText, 
+            sender: sender, 
+            time: getCurrentTime() 
+          });
+          
+          // Smooth scroll to bottom
+          setTimeout(() => {
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+          }, 100);
+          
+        } catch (error) {
+          console.warn("Error adding message:", error);
+        }
+      }
+
+      function showTypingIndicator() {
+        if (typingIndicator) {
+          typingIndicator.classList.add("active");
+          chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+      }
+
+      function hideTypingIndicator() {
+        if (typingIndicator) {
+          typingIndicator.classList.remove("active");
+        }
+      }
+
+      // Enhanced send message with better error handling
+      function sendMessage() {
+        try {
+          const message = chatbotInput.value ? chatbotInput.value.trim() : '';
+          
+          // Validate input
+          if (!message || isTyping) return;
+
+          if (message.length > 500) {
+            addMessage("Please keep your message under 500 characters for better processing.", "bot");
+            return;
+          }
+
+          // Check for potentially malicious input (before sanitization)
+          if (message.includes('<script') || message.includes('javascript:')) {
+            addMessage("I can't process that type of input. Please ask a normal question about Utkarsh.", "bot");
+            chatbotInput.value = "";
+            return;
+          }
+
+          // Add user message (will be sanitized in addMessage function)
+          addMessage(message, "user");
+          chatbotInput.value = "";
+          chatbotSend.disabled = true;
+          isTyping = true;
+          
+          showTypingIndicator();
+          
+          // Simulate realistic typing delay
+          const typingDelay = Math.min(1000 + message.length * 20, 3000);
+          
+          setTimeout(() => {
+            try {
+              hideTypingIndicator();
+              const response = analyzeMessage(message);
+              addMessage(response, "bot");
+            } catch (error) {
+              console.warn("Error generating response:", error);
+              addMessage(getRandomResponse(responses.errors), "bot");
+            } finally {
+              isTyping = false;
+              chatbotSend.disabled = false;
+              chatbotInput.focus();
+            }
+          }, typingDelay);
+          
+        } catch (error) {
+          console.warn("Error sending message:", error);
+          isTyping = false;
+          chatbotSend.disabled = false;
+          hideTypingIndicator();
+          addMessage("Something went wrong. Please try again.", "bot");
+        }
+      }
+
+      // Event listeners with error handling
+      try {
+        chatbotToggle.addEventListener("click", () => {
+          try {
+            isOpen = !isOpen;
+            chatbotContainer.classList.toggle("active", isOpen);
+            
+            if (isOpen && chatbotMessages.children.length === 1) { // Only typing indicator
+              setTimeout(() => {
+                addMessage(getRandomResponse(responses.greetings), "bot");
+              }, 300);
+            }
+            
+            if (isOpen) {
+              chatbotInput.focus();
+            }
+          } catch (error) {
+            console.warn("Error toggling chatbot:", error);
+          }
+        });
+
+        chatbotClose.addEventListener("click", () => {
+          try {
+            isOpen = false;
+            chatbotContainer.classList.remove("active");
+          } catch (error) {
+            console.warn("Error closing chatbot:", error);
+          }
+        });
+
+        chatbotSend.addEventListener("click", sendMessage);
+
+        chatbotInput.addEventListener("keypress", (e) => {
+          try {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              sendMessage();
+            }
+          } catch (error) {
+            console.warn("Error handling keypress:", error);
+          }
+        });
+
+        // Input validation and character counter
+        chatbotInput.addEventListener("input", () => {
+          try {
+            const value = chatbotInput.value || '';
+            const length = value.length;
+            
+            // Disable send button based on conditions
+            chatbotSend.disabled = length === 0 || length > 500 || isTyping;
+            
+            // Visual feedback for character limit
+            if (length > 450) {
+              chatbotInput.style.borderColor = length > 500 ? '#ef4444' : '#f59e0b';
+            } else {
+              chatbotInput.style.borderColor = '';
+            }
+            
+          } catch (error) {
+            console.warn("Error validating input:", error);
+          }
+        });
+
+      } catch (error) {
+        console.warn("Error setting up chatbot event listeners:", error);
+      }
+
+    } catch (error) {
+      console.warn("Failed to initialize chatbot:", error);
     }
   }
 
-  // Initialize greeting
-  updateGreeting();
+  // Counter animations
+  function initCounterAnimations() {
+    const counters = document.querySelectorAll(".stat-number");
+    
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: "0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = parseInt(counter.getAttribute("data-count"));
+          const suffix = counter.getAttribute("data-suffix") || "";
+          
+          if (target && !counter.classList.contains("animated")) {
+            counter.classList.add("animated");
+            animateCounter(counter, target, suffix);
+          }
+        }
+      });
+    }, observerOptions);
+
+    counters.forEach((counter) => {
+      observer.observe(counter);
+    });
+  }
+
+  function animateCounter(element, target, suffix) {
+    let current = 0;
+    const duration = 2000;
+    const increment = target / (duration / 16);
+    
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      element.textContent = Math.floor(current) + suffix;
+    }, 16);
+  }
+
+  // Contact form handling
+  // Keyboard navigation support
+  function initKeyboardNavigation() {
+    // Skip to main content link
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Tab" && e.shiftKey === false) {
+        const skipLink = document.querySelector(".skip-link");
+        if (skipLink && document.activeElement === document.body) {
+          skipLink.focus();
+        }
+      }
+    });
+
+    // Navigation with arrow keys
+    const navLinks = document.querySelectorAll(".nav-link");
+    navLinks.forEach((link, index) => {
+      link.addEventListener("keydown", function(e) {
+        if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+          e.preventDefault();
+          const nextIndex = (index + 1) % navLinks.length;
+          navLinks[nextIndex].focus();
+        } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+          e.preventDefault();
+          const prevIndex = (index - 1 + navLinks.length) % navLinks.length;
+          navLinks[prevIndex].focus();
+        }
+      });
+    });
+  }
+
+  // Accessibility features
+  function initAccessibilityFeatures() {
+    // Announce dynamic content changes to screen readers
+    function announceToScreenReader(message) {
+      const announcement = document.createElement("div");
+      announcement.setAttribute("aria-live", "polite");
+      announcement.setAttribute("aria-atomic", "true");
+      announcement.className = "sr-only";
+      announcement.textContent = message;
+      
+      document.body.appendChild(announcement);
+      
+      setTimeout(() => {
+        document.body.removeChild(announcement);
+      }, 1000);
+    }
+
+    // Add aria-labels to interactive elements without text
+    document.querySelectorAll("button:not([aria-label])").forEach(button => {
+      if (!button.textContent.trim()) {
+        const icon = button.querySelector("i");
+        if (icon) {
+          const iconClass = icon.className;
+          if (iconClass.includes("fa-moon") || iconClass.includes("fa-sun")) {
+            button.setAttribute("aria-label", "Toggle dark/light theme");
+          }
+        }
+      }
+    });
+
+    // Enhanced focus management
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Tab") {
+        document.body.classList.add("keyboard-navigation");
+      }
+    });
+
+    document.addEventListener("mousedown", function() {
+      document.body.classList.remove("keyboard-navigation");
+    });
+  }
+
+  // Error handling and recovery
+  function initErrorHandling() {
+    // Global error handler
+    window.addEventListener("error", function(e) {
+      console.error("JavaScript error:", e.error);
+      
+      // Attempt to recover from common errors
+      if (e.error && e.error.message.includes("particlesJS")) {
+        console.log("Particles.js error detected, attempting to reload particles");
+        setTimeout(() => {
+          initParticles();
+        }, 1000);
+      }
+    });
+
+    // Unhandled promise rejection handler
+    window.addEventListener("unhandledrejection", function(e) {
+      console.error("Unhandled promise rejection:", e.reason);
+      e.preventDefault(); // Prevent the default browser behavior
+    });
+
+    // Check for missing critical elements
+    const criticalElements = [
+      "#themeToggle",
+      "#mobileMenuToggle", 
+      ".nav-links",
+      "#particles-js"
+    ];
+
+    criticalElements.forEach(selector => {
+      if (!document.querySelector(selector)) {
+        console.warn(`Critical element missing: ${selector}`);
+      }
+    });
+  }
+
+  // Performance optimization
+  function initPerformanceOptimizations() {
+    // Debounce scroll events
+    let scrollTimeout;
+    const originalScrollHandler = window.onscroll;
+    
+    window.addEventListener('scroll', function() {
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+      scrollTimeout = setTimeout(() => {
+        if (originalScrollHandler) originalScrollHandler();
+      }, 16); // ~60fps
+    });
+
+    // Preload critical images
+    const criticalImages = ['assets/images/profile-pic.png', 'assets/images/aichatbot.png'];
+    criticalImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  }
+
+  // Initialize performance optimizations
+  initPerformanceOptimizations();
 });
