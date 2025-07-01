@@ -319,7 +319,27 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
         liveDemo: "https://t.me/utkarsh_streak_bot",
         github: "https://github.com/utkarshrajputt/leetcode-streak-checker"
-      }
+      },
+      6: {
+  title: "QuickTalk",
+  description: "A feature-rich social media platform built with Django, featuring real-time interactions, tweet system with media support, user profiles, follow system, and modern dark-themed UI with seamless AJAX functionality.",
+  technologies: ["Django", "Python", "Tailwind CSS", "JavaScript", "AJAX", "SQLite", "HTML5"],
+  images: [],
+  features: [
+    "User authentication and secure login/signup system",
+    "Tweet creation with text and media upload support",
+    "Real-time like/unlike and bookmark functionality via AJAX",
+    "User profiles with customizable bios and profile pictures",
+    "Follow/unfollow system for social networking",
+    "Comment system for engaging discussions",
+    "Search and user discovery features",
+    "Responsive design optimized for all devices",
+    "Modern dark theme with smooth animations",
+    "Professional error handling and validation"
+  ],
+  liveDemo: "https://quicktalk-vjyl.onrender.com/", 
+  github: "https://github.com/utkarshrajputt/QuickTalk"
+}
     };
 
     // Modal elements
