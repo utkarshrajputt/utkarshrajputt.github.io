@@ -663,52 +663,132 @@ document.addEventListener("DOMContentLoaded", function () {
         return responseArray[Math.floor(Math.random() * responseArray.length)];
       }
 
-      // Enhanced message analysis with better pattern matching
-      function analyzeMessage(message) {
-        try {
-          const lowerMessage = message.toLowerCase().trim();
-          const keywords = {
-            greetings: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening', 'start'],
-            skills: ['skill', 'technology', 'tech', 'programming', 'language', 'framework', 'development', 'coding', 'software'],
-            projects: ['project', 'work', 'portfolio', 'build', 'develop', 'application', 'website', 'system'],
-            experience: ['experience', 'background', 'career', 'job', 'internship', 'professional', 'workplace'],
-            education: ['education', 'study', 'college', 'university', 'degree', 'academic', 'student', 'learning'],
-            achievements: ['achievement', 'award', 'recognition', 'accomplishment', 'success', 'leadership', 'president'],
-            technologies: ['python', 'django', 'javascript', 'react', 'ai', 'ml', 'machine learning', 'database', 'mysql'],
-            motivation: ['motivation', 'inspire', 'passion', 'drive', 'goal', 'vision', 'future', 'ambition'],
-            contact: ['contact', 'reach', 'connect', 'email', 'phone', 'social', 'linkedin', 'github']
-          };
+          // Enhanced message analysis with better pattern matching and AI fallback
+          async function checkAndUseAI(message) {
+            const lowerMessage = message.toLowerCase().trim();
+            const keywords = {
+              greetings: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening', 'start'],
+              skills: ['skill', 'technology', 'tech', 'programming', 'language', 'framework', 'development', 'coding', 'software'],
+              projects: ['project', 'work', 'portfolio', 'build', 'develop', 'application', 'website', 'system'],
+              experience: ['experience', 'background', 'career', 'job', 'internship', 'professional', 'workplace'],
+              education: ['education', 'study', 'college', 'university', 'degree', 'academic', 'student', 'learning'],
+              achievements: ['achievement', 'award', 'recognition', 'accomplishment', 'success', 'leadership', 'president'],
+              technologies: ['python', 'django', 'javascript', 'react', 'ai', 'ml', 'machine learning', 'database', 'mysql'],
+              motivation: ['motivation', 'inspire', 'passion', 'drive', 'goal', 'vision', 'future', 'ambition'],
+              contact: ['contact', 'reach', 'connect', 'email', 'phone', 'social', 'linkedin', 'github']
+            };
 
-          // Find the best matching category
-          let bestMatch = 'default';
-          let maxMatches = 0;
+            // Find the best matching category
+            let bestMatch = 'default';
+            let maxMatches = 0;
 
-          for (const [category, words] of Object.entries(keywords)) {
-            const matches = words.filter(word => lowerMessage.includes(word)).length;
-            if (matches > maxMatches) {
-              maxMatches = matches;
-              bestMatch = category;
+            for (const [category, words] of Object.entries(keywords)) {
+              const matches = words.filter(word => lowerMessage.includes(word)).length;
+              if (matches > maxMatches) {
+                maxMatches = matches;
+                bestMatch = category;
+              }
+            }
+
+            // Determine if we should use AI
+            const shouldUseAI = bestMatch === 'default' && maxMatches === 0 && message.length > 10;
+            
+            return { bestMatch, shouldUseAI, maxMatches };
+          }
+
+          // Updated message analysis function
+          async function analyzeMessage(message) {
+            try {
+              const lowerMessage = message.toLowerCase().trim();
+              
+              // Special cases for specific queries
+              if (lowerMessage.includes('gpa') || lowerMessage.includes('grade') || lowerMessage.includes('score')) {
+                return { response: getRandomResponse(responses.education), isAI: false };
+              }
+
+              if (lowerMessage.includes('help') || lowerMessage.includes('assist') || lowerMessage.includes('support')) {
+                return { 
+                  response: "I'm here to help! You can ask me about Utkarsh's skills, projects, education, experience, or achievements. What interests you most?", 
+                  isAI: false 
+                };
+              }
+
+              const { bestMatch, shouldUseAI } = await checkAndUseAI(message);
+
+              // If no good match found and has meaningful content, try AI
+              if (shouldUseAI) {
+                try {
+                  const aiResponse = await getAIResponse(message);
+                  if (aiResponse) {
+                    return { response: aiResponse, isAI: true };
+                  }
+                } catch (error) {
+                  console.warn("AI API failed, using default response:", error);
+                }
+              }
+
+              return { response: getRandomResponse(responses[bestMatch]), isAI: false };
+            } catch (error) {
+              console.warn("Error analyzing message:", error);
+              return { response: getRandomResponse(responses.errors), isAI: false };
             }
           }
 
-          // Special cases for specific queries
-          if (lowerMessage.includes('gpa') || lowerMessage.includes('grade') || lowerMessage.includes('score')) {
-            return getRandomResponse(responses.education);
+      // DeepSeek AI integration for fallback responses
+      async function getAIResponse(userMessage) {
+        try {
+          const contextPrompt = `You are Utkarsh Rajput's AI assistant on his portfolio website. Utkarsh is a Master of Computer Applications (MCA) student at PCCoE, Pune University with a 9.3 GPA. He's skilled in Python, Django, AI/ML, and full-stack development. He has worked on projects like AI ChatBot, e-commerce platforms, and serves as PMA President.
+
+Keep responses:
+- Conversational and helpful
+- Under 150 words
+- Professional but friendly
+- Related to Utkarsh when possible
+- Encouraging users to contact him for detailed discussions
+
+User question: "${userMessage}"
+
+Response:`;
+
+          const response = await fetch('https://api.deepseek.com/chat/completions', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer sk-ea8ef3b1f4a9455ea01323ceaf2b5931'
+            },
+            body: JSON.stringify({
+              model: 'deepseek-chat',
+              messages: [
+                {
+                  role: 'user',
+                  content: contextPrompt
+                }
+              ],
+              max_tokens: 200,
+              temperature: 0.7
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error(`API request failed: ${response.status}`);
           }
 
-          if (lowerMessage.includes('help') || lowerMessage.includes('assist') || lowerMessage.includes('support')) {
-            return "I'm here to help! You can ask me about Utkarsh's skills, projects, education, experience, or achievements. What interests you most?";
+          const data = await response.json();
+          
+          if (data.choices && data.choices[0] && data.choices[0].message) {
+            return data.choices[0].message.content.trim();
           }
-
-          return getRandomResponse(responses[bestMatch]);
+          
+          throw new Error('Invalid API response format');
+          
         } catch (error) {
-          console.warn("Error analyzing message:", error);
-          return getRandomResponse(responses.errors);
+          console.warn('DeepSeek API error:', error);
+          return null; // Will fall back to default responses
         }
       }
 
       // Enhanced message display with better UX
-      function addMessage(text, sender, showTime = true) {
+      function addMessage(text, sender, showTime = true, isAI = false) {
         try {
           if (!text || typeof text !== 'string') {
             console.warn("Invalid message text provided");
@@ -717,6 +797,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
           const messageDiv = document.createElement("div");
           messageDiv.className = `message ${sender}-message`;
+          
+          // Add AI indicator class if this is an AI response
+          if (isAI && sender === 'bot') {
+            messageDiv.classList.add('ai-powered');
+          }
           
           const contentDiv = document.createElement("div");
           contentDiv.className = "message-content";
@@ -733,6 +818,21 @@ document.addEventListener("DOMContentLoaded", function () {
           
           contentDiv.textContent = sanitizedText;
           messageDiv.appendChild(contentDiv);
+          
+          // Add subtle AI indicator for AI-powered responses
+          if (isAI && sender === 'bot') {
+            const aiIndicator = document.createElement("div");
+            aiIndicator.className = "ai-indicator";
+            aiIndicator.innerHTML = "✨ AI-powered";
+            aiIndicator.style.cssText = `
+              font-size: 0.7rem;
+              color: var(--accent-color);
+              opacity: 0.6;
+              margin-top: 0.25rem;
+              font-style: italic;
+            `;
+            messageDiv.appendChild(aiIndicator);
+          }
           
           if (showTime) {
             const timeDiv = document.createElement("div");
@@ -765,9 +865,24 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
 
-      function showTypingIndicator() {
+      function showTypingIndicator(isAI = false) {
         if (typingIndicator) {
           typingIndicator.classList.add("active");
+          if (isAI) {
+            typingIndicator.setAttribute('data-ai', 'true');
+            // Add a temporary status message for AI processing
+            const statusMsg = document.createElement('div');
+            statusMsg.className = 'ai-status-message';
+            statusMsg.textContent = 'Consulting AI for your query...';
+            statusMsg.style.cssText = `
+              font-size: 0.8rem;
+              color: var(--accent-color);
+              opacity: 0.7;
+              margin-bottom: 0.5rem;
+              font-style: italic;
+            `;
+            typingIndicator.parentNode.insertBefore(statusMsg, typingIndicator);
+          }
           chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
         }
       }
@@ -775,11 +890,17 @@ document.addEventListener("DOMContentLoaded", function () {
       function hideTypingIndicator() {
         if (typingIndicator) {
           typingIndicator.classList.remove("active");
+          typingIndicator.removeAttribute('data-ai');
+          // Remove any AI status message
+          const statusMsg = chatbotMessages.querySelector('.ai-status-message');
+          if (statusMsg) {
+            statusMsg.remove();
+          }
         }
       }
 
-      // Enhanced send message with better error handling
-      function sendMessage() {
+      // Enhanced send message with better error handling and AI integration
+      async function sendMessage() {
         try {
           const message = chatbotInput.value ? chatbotInput.value.trim() : '';
           
@@ -806,16 +927,31 @@ document.addEventListener("DOMContentLoaded", function () {
           
           showTypingIndicator();
           
-          // Simulate realistic typing delay
-          const typingDelay = Math.min(1000 + message.length * 20, 3000);
+          // Simulate realistic typing delay (longer for AI responses)
+          const baseDelay = 1000 + message.length * 20;
+          const typingDelay = Math.min(baseDelay, 4000); // Increased max delay for AI processing
           
-          setTimeout(() => {
+          setTimeout(async () => {
             try {
+              // Check if we'll use AI to adjust typing indicator
+              const { shouldUseAI } = await checkAndUseAI(message);
+              
+              if (shouldUseAI) {
+                showTypingIndicator(true); // Show AI processing indicator
+              }
+              
+              const responseData = await analyzeMessage(message);
               hideTypingIndicator();
-              const response = analyzeMessage(message);
-              addMessage(response, "bot");
+              
+              // Add AI indicator if response came from AI
+              if (responseData.isAI) {
+                addMessage(responseData.response, "bot", true, true); // Last parameter indicates AI response
+              } else {
+                addMessage(responseData.response, "bot");
+              }
             } catch (error) {
               console.warn("Error generating response:", error);
+              hideTypingIndicator();
               addMessage(getRandomResponse(responses.errors), "bot");
             } finally {
               isTyping = false;

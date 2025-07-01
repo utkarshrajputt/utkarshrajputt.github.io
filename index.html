@@ -982,18 +982,19 @@
       </div>
     </footer>
 
-    <!-- Enhanced Greeting Loader -->
-      <div class="greeting-loader">
-        <div class="greeting-container">
-          <div class="greeting-text"></div>
-          <div class="greeting-subtitle">Welcome to my digital space</div>
-          <div class="loader-dots">
-            <div class="loader-dot"></div>
-            <div class="loader-dot"></div>
-            <div class="loader-dot"></div>
+    <!-- Modern Quick Loader -->
+      <div class="modern-loader">
+        <div class="loader-content">
+          <div class="loader-greeting">
+            <span class="greeting-text">Hello!</span>
+            <span class="greeting-subtitle">Welcome to my portfolio</span>
+          </div>
+          <div class="loader-animation">
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
           </div>
         </div>
-        <div class="loader-progress"></div>
       </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -1013,84 +1014,25 @@
       });
     </script>
     <script>
-      // Fast & Smooth Greeting Loader
+      // Modern Quick Loader
       document.addEventListener("DOMContentLoaded", () => {
-        const greetings = [
-          { text: "नमस्ते", lang: "Hindi" },
-          { text: "Hello", lang: "English" },
-          { text: "こんにちは", lang: "Japanese" }
-        ];
+        const loader = document.querySelector(".modern-loader");
         
-        let currentIndex = 0;
-        const loader = document.querySelector(".greeting-loader");
-        const greetingText = document.querySelector(".greeting-text");
-        const subtitle = document.querySelector(".greeting-subtitle");
-        
-        // Ensure loader is visible
-        if (loader) {
-          loader.style.display = 'flex';
-          loader.style.opacity = '1';
-        }
-        
-        // Disable scrolling
+        // Disable scrolling during load
         document.body.style.overflow = "hidden";
         
-        // Create fewer, faster particles
-        function createParticles() {
-          const particleCount = 6;
-          for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'loader-particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 2 + 's';
-            particle.style.animationDuration = (2 + Math.random() * 1) + 's';
-            loader.appendChild(particle);
-          }
-        }
-        
-        createParticles();
-        
-        function showGreeting() {
-          if (currentIndex < greetings.length) {
-            const greeting = greetings[currentIndex];
-            
-            // Set text content with faster animation
-            greetingText.textContent = greeting.text;
-            greetingText.style.opacity = '1';
-            greetingText.style.animation = 'textSlideIn 0.5s ease forwards';
-            
-            // Update subtitle
-            if (currentIndex > 0) {
-              subtitle.textContent = `${greeting.lang} - Welcome to my digital space`;
-            }
-            
-            currentIndex++;
+        // Auto-hide loader after quick animation
+        setTimeout(() => {
+          if (loader) {
+            loader.classList.add('fade-out');
             
             setTimeout(() => {
-              if (currentIndex < greetings.length) {
-                greetingText.style.animation = 'textSlideOut 0.3s ease forwards';
-                setTimeout(showGreeting, 350);
-              } else {
-                finishLoader();
-              }
-            }, 500); // Much faster timing
+              loader.style.display = 'none';
+              document.body.style.overflow = 'auto';
+              document.body.classList.add('loaded');
+            }, 500);
           }
-        }
-        
-        function finishLoader() {
-          // Quick fade out
-          loader.style.opacity = '0';
-          loader.style.transform = 'scale(1.05)';
-          
-          setTimeout(() => {
-            loader.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            document.body.classList.add('loaded');
-          }, 400); // Faster cleanup
-        }
-        
-        // Start immediately
-        setTimeout(showGreeting, 200);
+        }, 1200); // Quick 1.2s total duration
       });
     </script>
   </body>
