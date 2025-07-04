@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Next-Gen AI Chatbots with LLMs | Utkarsh Rajput"
+    />
+    <meta
+      property="og:description"
+      content="How I built document-aware, LLM-powered chatbots with DeepSeek + vector DBs."
+    />
+    <meta
+      property="og:image"
+      content="https://yourdomain.com/assets/images/og-thumbnail-chatbot.png"
+    />
+    <meta
+      property="og:url"
+      content="https://yourdomain.com/blogs/building-ai-chatbots-with-llms.html"
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Next-Gen AI Chatbots with LLMs | Utkarsh Rajput"
+    />
+    <meta
+      name="twitter:description"
+      content="Blending AI, UX, and vector search to build smart assistants."
+    />
+    <meta
+      name="twitter:image"
+      content="https://yourdomain.com/assets/images/og-thumbnail-chatbot.png"
+    />
+    <!-- Canonical URL -->
+    <link
+      rel="canonical"
+      href="https://yourdomain.com/blogs/building-ai-chatbots-with-llms.html"
+    />
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://yourdomain.com/assets/images/favicon.ico"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Next-Gen AI Chatbots with LLMs | Utkarsh Rajput</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: #f0f2f5;
+        font-family: "Inter", sans-serif;
+        color: #1f2937;
+      }
+      .blog-hero {
+        padding: 3rem 1rem 2rem;
+        text-align: center;
+        background: linear-gradient(135deg, #0f172a, #1e3a8a);
+        color: white;
+        border-bottom-left-radius: 2rem;
+        border-bottom-right-radius: 2rem;
+        position: relative;
+      }
+      .blog-title {
+        font-size: 2.75rem;
+        font-family: "Poppins", sans-serif;
+        margin-bottom: 0.75rem;
+      }
+      .blog-meta {
+        font-size: 0.95rem;
+        color: #cbd5e1;
+        margin-bottom: 0.5rem;
+      }
+      .reading-time {
+        font-size: 0.9rem;
+        color: #e2e8f0;
+        margin-bottom: 1rem;
+      }
+      .blog-excerpt {
+        font-size: 1.2rem;
+        color: #e2e8f0;
+        max-width: 700px;
+        margin: 0 auto 2rem auto;
+        line-height: 1.6;
+      }
+      .blog-share {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .blog-share a {
+        color: #fff;
+        background: #1e3a8a;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      .blog-content-section {
+        max-width: 780px;
+        background: #fff;
+        padding: 2.5rem;
+        margin: -3rem auto 3rem auto;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      }
+      .blog-content-section h2 {
+        font-size: 1.8rem;
+        margin: 2rem 0 1rem 0;
+        font-weight: 600;
+        color: #1e40af;
+      }
+      .blog-content-section p,
+      .blog-content-section li {
+        font-size: 1.05rem;
+        line-height: 1.75;
+      }
+      .blog-content-section ul,
+      .blog-content-section ol {
+        margin-left: 1.5rem;
+        padding-left: 1rem;
+      }
+      blockquote {
+        margin: 2rem 0;
+        padding: 1.2rem 1.5rem;
+        background: #f1f5f9;
+        border-left: 4px solid #1e40af;
+        font-style: italic;
+        color: #334155;
+      }
+      pre {
+        background: #0f172a;
+        color: #f1f5f9;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+      }
+      .back-link {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        background: #1e3a8a;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.9rem;
+        text-decoration: none;
+        z-index: 1000;
+      }
+      @media (max-width: 768px) {
+        .blog-title {
+          font-size: 2rem;
+        }
+        .blog-content-section {
+          padding: 1.2rem;
+        }
+        .back-link {
+          font-size: 0.75rem;
+          padding: 0.4rem 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="back-link" href="../index.html#blog"
+      ><i class="fas fa-arrow-left"></i> Back to Blogs</a
+    >
+    <section class="blog-hero">
+      <h1 class="blog-title">Next-Gen AI Chatbots with LLMs</h1>
+      <div class="blog-meta">
+        <i class="far fa-calendar-alt"></i> July 2025 &nbsp;&nbsp;|&nbsp;&nbsp;
+        <img
+          src="../assets/images/profile-pic.png"
+          alt="Utkarsh Rajput"
+          style="
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 8px;
+          "
+        />
+        Utkarsh Rajput
+      </div>
+      <div class="reading-time">⏱️ Estimated Reading Time: 4 min</div>
+      <p class="blog-excerpt">
+        Dive into how modern AI chatbots are built with LLMs like GPT, Mistral &
+        DeepSeek, and how I crafted one that blends document awareness,
+        user-friendly design, and real-time intelligence.
+      </p>
+      <div class="blog-share">
+        <a
+          href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourdomain.com/blogs/building-ai-chatbots-with-llms.html&title=Next-Gen AI Chatbots with LLMs"
+          target="_blank"
+          ><i class="fab fa-linkedin"></i> Share</a
+        >
+        <a
+          href="https://twitter.com/intent/tweet?url=https://yourdomain.com/blogs/building-ai-chatbots-with-llms.html&text=Next-Gen AI Chatbots with LLMs by @utkarshrajputt"
+          target="_blank"
+          ><i class="fab fa-twitter"></i> Tweet</a
+        >
+      </div>
+    </section>
+
+    <section class="blog-content-section">
+      <div>
+        <h2>🚀 The Evolution of Chatbots</h2>
+        <p>
+          Chatbots have come a long way from clunky rule-based scripts. With
+          LLMs now in play, they don't just respond — they understand,
+          contextualize, and converse.
+        </p>
+
+        <h2>🤖 Why LLMs Change the Game</h2>
+        <ul>
+          <li>
+            <b>Context Retention:</b> Understands multi-turn conversations like
+            a pro.
+          </li>
+          <li>
+            <b>Graceful Failures:</b> Falls back smartly with helpful
+            suggestions.
+          </li>
+          <li>
+            <b>Edge-Case Friendly:</b> Handles “uh-oh” moments better than
+            hardcoded flows.
+          </li>
+        </ul>
+
+        <h2>🧠 Behind the Build: Architecture</h2>
+        <ul>
+          <li>
+            <b>Frontend:</b> Sleek, responsive UI with user-friendly UX (like
+            this one).
+          </li>
+          <li>
+            <b>Middleware:</b> API layer handling auth, routing, rate-limiting.
+          </li>
+          <li>
+            <b>Model Brain:</b> LLMs via DeepSeek or Mistral, plugged via API.
+          </li>
+          <li>
+            <b>Memory Vault:</b> Vector DB (FAISS or Chroma) that stores context
+            as embeddings.
+          </li>
+        </ul>
+
+        <h2>🔧 How I Built It (In Real Life)</h2>
+        <ol>
+          <li>
+            Preprocessed user docs and embedded them with sentence transformers.
+          </li>
+          <li>
+            Hooked up the frontend with a typewriter-style UX and toastified
+            alerts.
+          </li>
+          <li>LLM endpoint plugged with fallback prompts and safety nets.</li>
+          <li>
+            Optimized backend using caching, debouncing and load balancing.
+          </li>
+        </ol>
+
+        <blockquote>
+          “A chatbot isn’t just code — it’s a convo between your logic and
+          someone’s curiosity.”
+        </blockquote>
+
+        <h2>📌 Lessons from the Frontlines</h2>
+        <ul>
+          <li>
+            <b>Prompt Injection is Real:</b> Sanitize like you’re scrubbing a
+            crime scene.
+          </li>
+          <li>
+            <b>Logs Save Lives:</b> Track EVERYTHING. You’ll thank yourself
+            later.
+          </li>
+          <li><b>Don’t Over-AI:</b> Use rules where precision > creativity.</li>
+        </ul>
+
+        <h2>💬 My Portfolio Chatbot</h2>
+        <p>
+          I made a chatbot that answers questions about my work, skills, and
+          projects. It uses a hybrid logic: static answers for FAQs, and
+          DeepSeek AI as backup. The result? Fast, helpful, and always on-brand.
+        </p>
+
+        <h2>✅ TL;DR</h2>
+        <p>
+          Want to build a smart, smooth-talking AI assistant? Blend LLMs with
+          vector search, smart UI, and a touch of common sense. That’s the
+          secret sauce.
+        </p>
+      </div>
+    </section>
+  </body>
+</html>

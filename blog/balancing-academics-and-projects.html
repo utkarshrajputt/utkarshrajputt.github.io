@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Next-Gen AI Chatbots with LLMs | Utkarsh Rajput"
+    />
+    <meta
+      property="og:description"
+      content="How I built document-aware, LLM-powered chatbots with DeepSeek + vector DBs."
+    />
+    <meta
+      property="og:image"
+      content="https://yourdomain.com/assets/images/og-thumbnail-chatbot.png"
+    />
+    <meta
+      property="og:url"
+      content="https://yourdomain.com/blogs/building-ai-chatbots-with-llms.html"
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Next-Gen AI Chatbots with LLMs | Utkarsh Rajput"
+    />
+    <meta
+      name="twitter:description"
+      content="Blending AI, UX, and vector search to build smart assistants."
+    />
+    <meta
+      name="twitter:image"
+      content="https://yourdomain.com/assets/images/og-thumbnail-chatbot.png"
+    />
+    <!-- Canonical URL -->
+    <link
+      rel="canonical"
+      href="https://yourdomain.com/blogs/building-ai-chatbots-with-llms.html"
+    />
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://yourdomain.com/assets/images/favicon.ico"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Balancing Academics and Projects | Utkarsh Rajput</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: #f9f9f9;
+        font-family: "Inter", sans-serif;
+        color: #1e293b;
+      }
+      .blog-hero {
+        padding: 3rem 1rem 2rem;
+        text-align: center;
+        background: linear-gradient(135deg, #3b0764, #6d28d9);
+        color: white;
+        border-bottom-left-radius: 2rem;
+        border-bottom-right-radius: 2rem;
+        position: relative;
+      }
+      .blog-title {
+        font-size: 2.75rem;
+        font-family: "Poppins", sans-serif;
+        margin-bottom: 0.75rem;
+      }
+      .blog-meta {
+        font-size: 0.95rem;
+        color: #e0e7ff;
+        margin-bottom: 0.5rem;
+      }
+      .reading-time {
+        font-size: 0.9rem;
+        color: #f3e8ff;
+        margin-bottom: 1rem;
+      }
+      .blog-excerpt {
+        font-size: 1.2rem;
+        color: #f3e8ff;
+        max-width: 700px;
+        margin: 0 auto 2rem auto;
+        line-height: 1.6;
+      }
+      .blog-share {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .blog-share a {
+        color: #fff;
+        background: #6d28d9;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      .blog-content-section {
+        max-width: 780px;
+        background: #fff;
+        padding: 2.5rem;
+        margin: -3rem auto 3rem auto;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      }
+      .blog-content-section h2 {
+        font-size: 1.8rem;
+        margin: 2rem 0 1rem 0;
+        font-weight: 600;
+        color: #6d28d9;
+      }
+      .blog-content-section p,
+      .blog-content-section li {
+        font-size: 1.05rem;
+        line-height: 1.75;
+      }
+      .blog-content-section ul,
+      .blog-content-section ol {
+        margin-left: 1.5rem;
+        padding-left: 1rem;
+      }
+      blockquote {
+        margin: 2rem 0;
+        padding: 1.2rem 1.5rem;
+        background: #f3e8ff;
+        border-left: 4px solid #6d28d9;
+        font-style: italic;
+        color: #4b5563;
+      }
+      pre {
+        background: #1e1b4b;
+        color: #f3e8ff;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+      }
+      .back-link {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        background: #6d28d9;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.9rem;
+        text-decoration: none;
+        z-index: 1000;
+      }
+      @media (max-width: 768px) {
+        .blog-title {
+          font-size: 2rem;
+        }
+        .blog-content-section {
+          padding: 1.2rem;
+        }
+        .back-link {
+          font-size: 0.75rem;
+          padding: 0.4rem 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="back-link" href="../index.html#blog"
+      ><i class="fas fa-arrow-left"></i> Back to Blogs</a
+    >
+    <section class="blog-hero">
+      <h1 class="blog-title">Balancing Academics and Projects</h1>
+      <div class="blog-meta">
+        <i class="far fa-calendar-alt"></i> April 10, 2025
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <img
+          src="../assets/images/profile-pic.png"
+          alt="Utkarsh Rajput"
+          style="
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 8px;
+          "
+        />
+        Utkarsh Rajput
+      </div>
+      <div class="reading-time">⏱️ Estimated Reading Time: 5 min</div>
+      <p class="blog-excerpt">
+        Strategies for effectively managing coursework while working on personal
+        projects and gaining practical experience.
+      </p>
+      <div class="blog-share">
+        <a
+          href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourdomain.com/blogs/balancing-academics-and-projects.html&title=Balancing Academics and Projects"
+          target="_blank"
+          ><i class="fab fa-linkedin"></i> Share</a
+        >
+        <a
+          href="https://twitter.com/intent/tweet?url=https://yourdomain.com/blogs/balancing-academics-and-projects.html&text=Balancing Academics and Projects by @utkarshrajputt"
+          target="_blank"
+          ><i class="fab fa-twitter"></i> Tweet</a
+        >
+      </div>
+    </section>
+    <section class="blog-content-section section">
+      <div class="blog-content-container">
+        <h2>Introduction</h2>
+        <p>
+          Balancing academics with personal projects is a challenge faced by
+          many students, especially in tech fields where practical experience is
+          as valuable as classroom learning. Over the past few years, I’ve
+          juggled demanding coursework, internships, and side projects. Here’s
+          what I’ve learned about making it work—and thriving.
+        </p>
+
+        <h2>1. Time Management: The Foundation</h2>
+        <ul>
+          <li>
+            <b>Prioritize ruthlessly:</b> Each week, I list my top academic
+            deadlines and project milestones using Notion dashboards.
+          </li>
+          <li>
+            <b>Block focused time:</b> 2-3 hour blocks + Pomodoro = peak
+            productivity.
+          </li>
+          <li>
+            <b>Batch tasks:</b> Coding sprints, then research. No
+            context-switching chaos.
+          </li>
+          <li>
+            <b>Be realistic:</b> Scale up or down based on workload. Balance is
+            fluid.
+          </li>
+        </ul>
+
+        <h2>2. Real Learning via Projects</h2>
+        <ul>
+          <li><b>Apply ASAP:</b> Learn REST APIs? Build one. Immediately.</li>
+          <li>
+            <b>Document wins/fails:</b> Project journal = self-review = faster
+            growth.
+          </li>
+          <li>
+            <b>Show & share:</b> GitHub repos + LinkedIn posts = visibility +
+            revision.
+          </li>
+        </ul>
+
+        <blockquote>
+          "The best way to learn is by doing. Projects turn abstract concepts
+          into real skills."
+        </blockquote>
+
+        <h2>3. Staying Sharp, Not Burnt Out</h2>
+        <ul>
+          <li><b>Micro-goals:</b> Tiny steps = continuous dopamine hits.</li>
+          <li>
+            <b>Celebrate wins:</b> Big or small. Don’t ignore your own effort.
+          </li>
+          <li>
+            <b>Peer power:</b> Share, learn, grow together. Community matters.
+          </li>
+          <li><b>Unplug consciously:</b> No screens ≠ laziness. It’s fuel.</li>
+        </ul>
+
+        <h2>4. Tools I Swear By</h2>
+        <ul>
+          <li><b>Notion:</b> Planning & tracking = clarity.</li>
+          <li><b>Google Calendar:</b> Alarms don’t lie.</li>
+          <li><b>GitHub Projects:</b> Structure your chaos.</li>
+          <li><b>Pomofocus / Forest:</b> Focus like a monk.</li>
+        </ul>
+
+        <h2>5. My MCA Story</h2>
+        <p>
+          During my MCA, I kept a 9.3 GPA while building a chatbot and a portal
+          used by 900+ students. My secret:
+        </p>
+        <ol>
+          <li>Weekdays = lectures. Weekends = side project hustle.</li>
+          <li>Collab with friends who challenge and support.</li>
+          <li>Failures = feedback. Always iterate.</li>
+        </ol>
+
+        <h2>Conclusion</h2>
+        <p>
+          You can build your future without burning out your present. Just pace
+          yourself, plan smart, and give yourself the same grace you’d give a
+          teammate. You’re doing great.
+        </p>
+      </div>
+    </section>
+  </body>
+</html>

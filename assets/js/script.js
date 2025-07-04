@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "AI ChatBot",
         description: "Advanced AI chatbot that processes uploaded files and returns intelligent responses using state-of-the-art NLP techniques.",
         technologies: ["Python", "Flask", "NLP", "Machine Learning", "AI"],
-        images: ["assets/images/aichatbot.png","assets/images/aichatbot.png"],
+        images: ["assets/images/aichatbot.png","assets/images/aichatbot2.png"],
         features: [
           "File upload and processing capabilities",
           "Natural language understanding",
@@ -257,14 +257,14 @@ document.addEventListener("DOMContentLoaded", function () {
           "Multi-format document support",
           "Real-time chat interface"
         ],
-        liveDemo: "https://ai-chatbot-demo.example.com",
+        liveDemo: "https://colab.research.google.com/drive/1kWkgviAqgbNQfT9coVTGbc6tpXd6OiQm?usp=sharing",
         github: "https://github.com/utkarshrajputt/rag-chatbot"
       },
       2: {
         title: "Smart Marketplace",
         description: "A comprehensive e-commerce platform that facilitates secure transactions between buyers and sellers with AI-powered features.",
         technologies: ["Django", "Python", "PostgreSQL", "AI Chatbot", "REST API"],
-        images: [],
+        images: ["assets/images/shopease/shopease1.png","assets/images/shopease/shopease2.png","assets/images/shopease/shopease3.png","assets/images/shopease/shopease4.png","assets/images/shopease/shopease5.png","assets/images/shopease/shopease6.png"],
         features: [
           "User authentication and authorization",
           "Product catalog with search functionality",
@@ -372,12 +372,41 @@ document.addEventListener("DOMContentLoaded", function () {
         if (project.images && project.images.length > 0) {
           imagesContainer.classList.add('has-images');
           imagesContainer.innerHTML = project.images
-            .map((img) => `
-              <div class="modal-image">
-                <img src="${img}" alt="${project.title} screenshot" loading="lazy">
+            .map((img, index) => `
+              <div class="modal-image" data-image-index="${index}">
+                <img src="${img}" alt="${project.title} screenshot" loading="lazy" 
+                     data-lightbox-trigger="true" 
+                     data-image-src="${img}" 
+                     data-project-title="${project.title}" 
+                     data-image-index="${index}">
               </div>
             `)
             .join("");
+          
+          // Add event listeners to images
+          const lightboxImages = imagesContainer.querySelectorAll('[data-lightbox-trigger="true"]');
+          console.log('Found lightbox images:', lightboxImages.length);
+          console.log('Project images:', project.images);
+          lightboxImages.forEach((img, index) => {
+            console.log('Adding event listener to image:', index, img);
+            img.addEventListener('click', (e) => {
+              console.log('Image clicked:', index, project.images[index]);
+              e.preventDefault();
+              e.stopPropagation();
+              
+              // Check if function exists
+              if (typeof window.openImageLightbox === 'function') {
+                console.log('Calling openImageLightbox...');
+                try {
+                  window.openImageLightbox(project.images[index], project.title, index, project.images);
+                } catch (error) {
+                  console.error('Error calling lightbox:', error);
+                }
+              } else {
+                console.error('openImageLightbox function not found!');
+              }
+            });
+          });
         } else {
           imagesContainer.classList.remove('has-images');
           imagesContainer.innerHTML = "";
@@ -1220,3 +1249,202 @@ Response:`;
   // Initialize performance optimizations
   initPerformanceOptimizations();
 });
+
+// ===== CLEAN LIGHTBOX IMPLEMENTATION =====
+
+let lightboxState = null;
+
+window.openImageLightbox = function(imageSrc, projectTitle, currentIndex, allImages) {
+  console.log('Opening lightbox:', { imageSrc, projectTitle, currentIndex });
+  
+  // Close any existing lightbox
+  closeLightbox();
+  
+  // Ensure we have valid image data
+  const images = Array.isArray(allImages) && allImages.length > 0 ? allImages : [imageSrc];
+  const safeIndex = Math.max(0, Math.min(currentIndex || 0, images.length - 1));
+  const currentImage = images[safeIndex];
+  
+  // Create lightbox HTML
+  const lightboxHTML = `
+    <div class="image-lightbox active">
+      <div class="lightbox-overlay"></div>
+      <div class="lightbox-content">
+        <div class="lightbox-header">
+          <h3 class="lightbox-title">${projectTitle} - Image ${safeIndex + 1} of ${images.length}</h3>
+          <button class="lightbox-close" aria-label="Close lightbox">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="lightbox-image-container">
+          ${images.length > 1 ? '<button class="lightbox-nav lightbox-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>' : ''}
+          <img src="${currentImage}" alt="${projectTitle} screenshot" class="lightbox-image">
+          ${images.length > 1 ? '<button class="lightbox-nav lightbox-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>' : ''}
+        </div>
+        ${images.length > 1 ? `
+          <div class="lightbox-indicators">
+            ${images.map((_, index) => `
+              <button class="lightbox-indicator ${index === safeIndex ? 'active' : ''}" data-index="${index}" aria-label="Go to image ${index + 1}"></button>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>
+    </div>
+  `;
+  
+  // Add to DOM
+  document.body.insertAdjacentHTML('beforeend', lightboxHTML);
+  document.body.style.overflow = 'hidden';
+  
+  // Store state
+  lightboxState = {
+    images: images,
+    currentIndex: safeIndex,
+    projectTitle: projectTitle
+  };
+  
+  // Add event listeners
+  setupLightboxEvents();
+};
+
+function setupLightboxEvents() {
+  const lightbox = document.querySelector('.image-lightbox');
+  if (!lightbox) return;
+  
+  // Close button
+  const closeBtn = lightbox.querySelector('.lightbox-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeLightbox);
+  }
+  
+  // Overlay click to close
+  const overlay = lightbox.querySelector('.lightbox-overlay');
+  if (overlay) {
+    overlay.addEventListener('click', closeLightbox);
+  }
+  
+  // Navigation buttons
+  const prevBtn = lightbox.querySelector('.lightbox-prev');
+  const nextBtn = lightbox.querySelector('.lightbox-next');
+  
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => navigateImage(-1));
+  }
+  
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => navigateImage(1));
+  }
+  
+  // Indicator buttons
+  const indicators = lightbox.querySelectorAll('.lightbox-indicator');
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => goToImage(index));
+  });
+  
+  // Keyboard navigation
+  document.addEventListener('keydown', handleLightboxKeyboard);
+}
+
+window.closeLightbox = function() {
+  const lightbox = document.querySelector('.image-lightbox');
+  if (lightbox) {
+    lightbox.classList.remove('active');
+    setTimeout(() => {
+      if (lightbox.parentNode) {
+        lightbox.parentNode.removeChild(lightbox);
+      }
+      document.body.style.overflow = 'auto';
+      document.removeEventListener('keydown', handleLightboxKeyboard);
+      lightboxState = null;
+    }, 300);
+  }
+};
+
+window.navigateImage = function(direction) {
+  if (!lightboxState) return;
+  
+  const { images, currentIndex } = lightboxState;
+  let newIndex = currentIndex + direction;
+  
+  // Handle wrapping
+  if (newIndex < 0) newIndex = images.length - 1;
+  if (newIndex >= images.length) newIndex = 0;
+  
+  updateLightboxImage(newIndex);
+};
+
+window.goToImage = function(index) {
+  if (!lightboxState || index < 0 || index >= lightboxState.images.length) return;
+  updateLightboxImage(index);
+};
+
+function updateLightboxImage(newIndex) {
+  if (!lightboxState) return;
+  
+  const { images, projectTitle } = lightboxState;
+  const lightbox = document.querySelector('.image-lightbox');
+  if (!lightbox) return;
+  
+  const lightboxImage = lightbox.querySelector('.lightbox-image');
+  const lightboxTitle = lightbox.querySelector('.lightbox-title');
+  const indicators = lightbox.querySelectorAll('.lightbox-indicator');
+  
+  if (lightboxImage) {
+    lightboxImage.style.opacity = '0';
+    setTimeout(() => {
+      lightboxImage.src = images[newIndex];
+      lightboxImage.style.opacity = '1';
+    }, 150);
+  }
+  
+  if (lightboxTitle) {
+    lightboxTitle.textContent = `${projectTitle} - Image ${newIndex + 1} of ${images.length}`;
+  }
+  
+  // Update indicators
+  indicators.forEach((indicator, index) => {
+    indicator.classList.toggle('active', index === newIndex);
+  });
+  
+  // Update state
+  lightboxState.currentIndex = newIndex;
+}
+
+function handleLightboxKeyboard(e) {
+  if (!lightboxState) return;
+  
+  switch(e.key) {
+    case 'Escape':
+      closeLightbox();
+      break;
+    case 'ArrowLeft':
+      navigateImage(-1);
+      break;
+    case 'ArrowRight':
+      navigateImage(1);
+      break;
+  }
+}
+
+// Debug functions
+// window.testLightbox = function() {
+//   console.log('Testing lightbox...');
+//   openImageLightbox('assets/images/aichatbot.png', 'Test Project', 0, ['assets/images/aichatbot.png', 'assets/images/aichatbot2.png']);
+// };
+
+// window.testShopEase = function() {
+//   console.log('Testing ShopEase lightbox...');
+//   const shopEaseImages = ["assets/images/shopease1.png","assets/images/shopease2.png","assets/images/shopease3.png","assets/images/shopease4.png"];
+//   openImageLightbox(shopEaseImages[0], 'ShopEase', 0, shopEaseImages);
+// };
+
+// window.checkImages = function() {
+//   const testImage = new Image();
+//   testImage.onload = function() {
+//     console.log('✅ Image assets/images/shopease1.png loaded successfully');
+//   };
+//   testImage.onerror = function() {
+//     console.error('❌ Failed to load assets/images/shopease1.png');
+//   };
+//   testImage.src = 'assets/images/shopease1.png';
+// };
